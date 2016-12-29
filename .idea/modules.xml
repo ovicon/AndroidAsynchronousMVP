@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AndroidCallbackMVP.iml" filepath="$PROJECT_DIR$/AndroidCallbackMVP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AndroidAsynchronousCallbackMVP.iml" filepath="$PROJECT_DIR$/AndroidAsynchronousCallbackMVP.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
