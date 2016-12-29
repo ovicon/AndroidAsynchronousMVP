@@ -1,5 +1,6 @@
 package ro.ovidiuconeac.androidasynchronouscallbackmvp.feature2.presentor;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 
 import ro.ovidiuconeac.androidasynchronouscallbackmvp.feature2.model.SecondModel;
@@ -48,5 +49,10 @@ public class SecondPresenterImpl implements SecondPresenter {
     @Override
     public void postImage(Bitmap bitmap) {
         view.postImage(bitmap);
+    }
+
+    @Override
+    public Context getContext() {
+        return view.getContext();
     }
 }

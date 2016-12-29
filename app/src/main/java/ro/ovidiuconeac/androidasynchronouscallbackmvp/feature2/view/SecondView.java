@@ -1,5 +1,6 @@
 package ro.ovidiuconeac.androidasynchronouscallbackmvp.feature2.view;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 
 /**
@@ -13,4 +14,5 @@ public interface SecondView {
     void postAge(int age);
     void requestImage();
     void postImage(Bitmap bitmap);
+    Context getContext();
 }

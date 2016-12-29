@@ -64,7 +64,7 @@ public class FirstActivity extends AppCompatActivity implements FirstView {
 
     @Override
     public void requestLogin() {
-        final Runnable enableUi = new Runnable() {
+        final Runnable enableUiTask = new Runnable() {
             @Override
             public void run() {
                 user.setEnabled(true);
@@ -73,7 +73,7 @@ public class FirstActivity extends AppCompatActivity implements FirstView {
                 progressBar.setVisibility(View.INVISIBLE);
             }
         };
-        final Runnable disableUi = new Runnable() {
+        final Runnable disableUiTask = new Runnable() {
             @Override
             public void run() {
                 user.setEnabled(false);
@@ -82,14 +82,14 @@ public class FirstActivity extends AppCompatActivity implements FirstView {
                 progressBar.setVisibility(View.VISIBLE);
             }
         };
-        final String u = this.user.getText().toString();
-        final String p = this.password.getText().toString();
-        final Runnable requestLoginTask = new Runnable() {
+        Runnable requestLoginTask = new Runnable() {
+            final String u = user.getText().toString();
+            final String p = password.getText().toString();
             @Override
             public void run() {
-                runOnUiThread(disableUi);
+                runOnUiThread(disableUiTask);
                 presenter.requestLogin(new User(u, p));
-                runOnUiThread(enableUi);
+                runOnUiThread(enableUiTask);
             }
         };
         executor.submit(requestLoginTask);
