@@ -61,24 +61,36 @@ public class SecondActivity extends AppCompatActivity implements SecondView {
     @Override
     @OnClick(R.id.buttonName)
     public void requestName() {
-        secondPresenter.requestName();
+        Runnable task = new Runnable() {
+            @Override
+            public void run() {
+                secondPresenter.requestName();
+            }
+        };
+        executor.submit(task);
     }
 
     @Override
     public void postName(final String name) {
-        Runnable nameTask = new Runnable() {
+        Runnable task = new Runnable() {
             @Override
             public void run() {
                 editTextName.setText(name);
             }
         };
-        editTextName.post(nameTask);
+        editTextName.post(task);
     }
 
     @Override
     @OnClick(R.id.buttonAge)
     public void requestAge() {
-        secondPresenter.requestAge();
+        Runnable task = new Runnable() {
+            @Override
+            public void run() {
+                secondPresenter.requestAge();
+            }
+        };
+        executor.submit(task);
     }
 
     @Override
@@ -95,7 +107,13 @@ public class SecondActivity extends AppCompatActivity implements SecondView {
     @Override
     @OnClick(R.id.buttonImage)
     public void requestImage() {
-        secondPresenter.requestImage();
+        Runnable task = new Runnable() {
+            @Override
+            public void run() {
+                secondPresenter.requestImage();
+            }
+        };
+        executor.submit(task);
     }
 
     @Override

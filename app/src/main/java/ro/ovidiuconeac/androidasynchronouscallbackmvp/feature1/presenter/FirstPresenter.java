@@ -10,4 +10,6 @@ public interface FirstPresenter {
     void requestLogin(User user);
     void doLogin();
     void showLoginError();
+    void requestMessage();
+    void postMessage(String message);
 }

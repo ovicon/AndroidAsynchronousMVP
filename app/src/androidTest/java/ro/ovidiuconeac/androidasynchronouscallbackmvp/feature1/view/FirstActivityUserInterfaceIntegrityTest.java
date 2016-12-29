@@ -68,7 +68,7 @@ public class FirstActivityUserInterfaceIntegrityTest {
         button.check(matches(isDisplayed()));
 
         ViewInteraction button2 = onView(
-                allOf(withId(R.id.buttonRandomMessage),
+                allOf(withId(R.id.buttonRequestMessage),
                         childAtPosition(
                                 allOf(withId(R.id.activity_main),
                                         childAtPosition(
@@ -79,7 +79,7 @@ public class FirstActivityUserInterfaceIntegrityTest {
         button2.check(matches(isDisplayed()));
 
         ViewInteraction button3 = onView(
-                allOf(withId(R.id.buttonRandomMessage),
+                allOf(withId(R.id.buttonRequestMessage),
                         childAtPosition(
                                 allOf(withId(R.id.activity_main),
                                         childAtPosition(

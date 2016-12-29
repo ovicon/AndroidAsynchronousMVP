@@ -32,4 +32,14 @@ public class FirstPresenterImpl implements FirstPresenter {
     public void showLoginError() {
         view.showLoginError();
     }
+
+    @Override
+    public void requestMessage() {
+        model.requestMessage();
+    }
+
+    @Override
+    public void postMessage(String message) {
+        view.postMessage(message);
+    }
 }

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.SparseArray;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,7 +11,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -44,8 +42,6 @@ public class FirstActivity extends AppCompatActivity implements FirstView {
 
     private FirstPresenter presenter;
     private ExecutorService executor;
-    private SparseArray<String> messages;
-    private Random random;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,19 +52,6 @@ public class FirstActivity extends AppCompatActivity implements FirstView {
         executor = Executors.newCachedThreadPool();
         // This view should not be visible by default, feels like a bug man
         progressBar.setVisibility(View.INVISIBLE);
-        messages = new SparseArray<>();
-        messages.put(0, "In teaching others we teach ourselves.");
-        messages.put(1, "Don’t regret the past, just learn from it.");
-        messages.put(2, "It does not matter how slowly you go as long as you do not stop.");
-        messages.put(3, "I hear and I forget, I see and I remember. I do and I understand.”");
-        messages.put(4, "Wherever you go, go with all your heart.");
-        messages.put(5, "Don’t wait. The time will never be just right.");
-        messages.put(6, "Do what you can, with what you have, where you are.");
-        messages.put(7, "Action is the foundational key to all success.");
-        messages.put(8, "The best way out is always through.");
-        messages.put(9, "If not us, who? If not now, when?");
-        messages.put(10, "I can, therefore I am.");
-        random = new Random();
     }
 
     @Override
@@ -76,8 +59,6 @@ public class FirstActivity extends AppCompatActivity implements FirstView {
         presenter = null;
         executor.shutdown();
         executor = null;
-        messages = null;
-        random = null;
         super.onDestroy();
     }
 
@@ -132,28 +113,30 @@ public class FirstActivity extends AppCompatActivity implements FirstView {
     }
 
     @Override
+    @OnClick(R.id.buttonRequestMessage)
     public void requestMessage() {
-
+        Runnable task = new Runnable() {
+            @Override
+            public void run() {
+                presenter.requestMessage();
+            }
+        };
+        executor.submit(task);
     }
 
     @Override
-    public void postMessage(String message) {
-
+    public void postMessage(final String msg) {
+        Runnable task = new Runnable() {
+            @Override
+            public void run() {
+                message.setText(msg);
+            }
+        };
+        runOnUiThread(task);
     }
 
     @OnClick(R.id.buttonLogin)
     public void login() {
         requestLogin();
-    }
-
-    @OnClick(R.id.buttonRandomMessage)
-    public void randomMessage() {
-        Runnable updateTask = new Runnable() {
-            @Override
-            public void run() {
-                message.setText(messages.get(random.nextInt(11)));
-            }
-        };
-        message.post(updateTask);
     }
 }
