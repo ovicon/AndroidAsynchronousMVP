@@ -3,6 +3,7 @@ package ro.ovidiuconeac.androidasynchronouscallbackmvp.feature1.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Process;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -67,6 +68,7 @@ public class FirstActivity extends AppCompatActivity implements FirstView {
         final Runnable enableUiTask = new Runnable() {
             @Override
             public void run() {
+                android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_MORE_FAVORABLE);
                 user.setEnabled(true);
                 password.setEnabled(true);
                 login.setEnabled(true);
@@ -76,6 +78,7 @@ public class FirstActivity extends AppCompatActivity implements FirstView {
         final Runnable disableUiTask = new Runnable() {
             @Override
             public void run() {
+                android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_MORE_FAVORABLE);
                 user.setEnabled(false);
                 password.setEnabled(false);
                 login.setEnabled(false);
@@ -87,6 +90,7 @@ public class FirstActivity extends AppCompatActivity implements FirstView {
             final String p = password.getText().toString();
             @Override
             public void run() {
+                android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
                 runOnUiThread(disableUiTask);
                 presenter.requestLogin(new User(u, p));
                 runOnUiThread(enableUiTask);
@@ -106,6 +110,7 @@ public class FirstActivity extends AppCompatActivity implements FirstView {
         Runnable task = new Runnable() {
             @Override
             public void run() {
+                android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_MORE_FAVORABLE);
                 Toast.makeText(_this, getString(R.string.login_error), Toast.LENGTH_SHORT).show();
             }
         };
@@ -118,6 +123,7 @@ public class FirstActivity extends AppCompatActivity implements FirstView {
         Runnable task = new Runnable() {
             @Override
             public void run() {
+                android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
                 presenter.requestMessage();
             }
         };
@@ -129,6 +135,7 @@ public class FirstActivity extends AppCompatActivity implements FirstView {
         Runnable task = new Runnable() {
             @Override
             public void run() {
+                android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
                 message.setText(msg);
             }
         };
