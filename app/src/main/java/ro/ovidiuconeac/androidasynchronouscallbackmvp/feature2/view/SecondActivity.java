@@ -3,6 +3,7 @@ package ro.ovidiuconeac.androidasynchronouscallbackmvp.feature2.view;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Process;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -75,6 +76,7 @@ public class SecondActivity extends AppCompatActivity implements SecondView {
         final Runnable enableUiTask = new Runnable() {
             @Override
             public void run() {
+                android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_MORE_FAVORABLE);
                 buttonName.setEnabled(true);
                 editTextName.setEnabled(true);
                 progressBarName.setVisibility(View.INVISIBLE);
@@ -83,6 +85,7 @@ public class SecondActivity extends AppCompatActivity implements SecondView {
         final Runnable disableUiTask = new Runnable() {
             @Override
             public void run() {
+                android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_MORE_FAVORABLE);
                 buttonName.setEnabled(false);
                 editTextName.setEnabled(false);
                 progressBarName.setVisibility(View.VISIBLE);
@@ -91,6 +94,7 @@ public class SecondActivity extends AppCompatActivity implements SecondView {
         Runnable task = new Runnable() {
             @Override
             public void run() {
+                android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
                 runOnUiThread(disableUiTask);
                 secondPresenter.requestName();
                 runOnUiThread(enableUiTask);
@@ -116,6 +120,7 @@ public class SecondActivity extends AppCompatActivity implements SecondView {
         final Runnable enableUiTask = new Runnable() {
             @Override
             public void run() {
+                android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_MORE_FAVORABLE);
                 buttonAge.setEnabled(true);
                 editTextAge.setEnabled(true);
                 progressBarAge.setVisibility(View.INVISIBLE);
@@ -124,6 +129,7 @@ public class SecondActivity extends AppCompatActivity implements SecondView {
         final Runnable disableUiTask = new Runnable() {
             @Override
             public void run() {
+                android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_MORE_FAVORABLE);
                 buttonAge.setEnabled(false);
                 editTextAge.setEnabled(false);
                 progressBarAge.setVisibility(View.VISIBLE);
@@ -132,6 +138,7 @@ public class SecondActivity extends AppCompatActivity implements SecondView {
         Runnable task = new Runnable() {
             @Override
             public void run() {
+                android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
                 runOnUiThread(disableUiTask);
                 secondPresenter.requestAge();
                 runOnUiThread(enableUiTask);
@@ -157,6 +164,7 @@ public class SecondActivity extends AppCompatActivity implements SecondView {
         final Runnable enableUiTask = new Runnable() {
             @Override
             public void run() {
+                android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_MORE_FAVORABLE);
                 buttonImage.setEnabled(true);
                 progressBarImage.setVisibility(View.INVISIBLE);
             }
@@ -164,6 +172,7 @@ public class SecondActivity extends AppCompatActivity implements SecondView {
         final Runnable disableUiTask = new Runnable() {
             @Override
             public void run() {
+                android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_MORE_FAVORABLE);
                 buttonImage.setEnabled(false);
                 progressBarImage.setVisibility(View.VISIBLE);
             }
@@ -171,6 +180,7 @@ public class SecondActivity extends AppCompatActivity implements SecondView {
         Runnable task = new Runnable() {
             @Override
             public void run() {
+                android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
                 runOnUiThread(disableUiTask);
                 secondPresenter.requestImage();
                 runOnUiThread(enableUiTask);
@@ -184,6 +194,7 @@ public class SecondActivity extends AppCompatActivity implements SecondView {
         Runnable task = new Runnable() {
             @Override
             public void run() {
+                android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
                 imageView.setImageBitmap(bitmap);
             }
         };
