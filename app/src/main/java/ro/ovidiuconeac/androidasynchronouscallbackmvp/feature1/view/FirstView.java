@@ -8,4 +8,6 @@ public interface FirstView {
     void requestLogin();
     void doLogin();
     void showLoginError();
+    void requestMessage();
+    void postMessage(String message);
 }

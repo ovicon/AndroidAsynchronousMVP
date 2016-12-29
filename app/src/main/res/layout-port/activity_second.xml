@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
@@ -10,5 +11,85 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="ro.ovidiuconeac.androidasynchronouscallbackmvp.feature2.view.SecondActivity">
 
+    <ProgressBar
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/progressBarName"
+        android:visibility="invisible" />
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_alignBottom="@+id/progressBarName"
+        android:layout_toRightOf="@+id/progressBarName"
+        android:id="@+id/editTextName" />
+
+    <Button
+        android:text="@string/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/editTextName"
+        android:layout_toRightOf="@+id/editTextName"
+        android:layout_toEndOf="@+id/editTextName"
+        android:id="@+id/buttonName" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/progressBarName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/progressBarAge"
+        android:visibility="invisible" />
+
+    <Button
+        android:text="@string/age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonName"
+        android:layout_toEndOf="@+id/editTextName"
+        android:id="@+id/buttonAge" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_alignBottom="@+id/progressBarAge"
+        android:layout_toStartOf="@+id/buttonAge"
+        android:id="@+id/editTextAge" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:id="@+id/imageView"
+        android:layout_below="@+id/editTextAge"
+        android:layout_toRightOf="@+id/progressBarAge"
+        android:layout_toEndOf="@+id/progressBarAge" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/progressBarAge"
+        android:layout_toLeftOf="@+id/editTextAge"
+        android:layout_toStartOf="@+id/editTextAge"
+        android:id="@+id/progressBarImage"
+        android:visibility="invisible" />
+
+    <Button
+        android:text="@string/image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonAge"
+        android:layout_toEndOf="@+id/editTextAge"
+        android:id="@+id/buttonImage" />
 </RelativeLayout>

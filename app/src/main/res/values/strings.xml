@@ -4,5 +4,8 @@
     <string name="hint_password">Password</string>
     <string name="login" >Login</string>
     <string name="login_error">Login error</string>
-    <string name="random_message">Random message</string>
+    <string name="random_message">Random mesage</string>
+    <string name="name">Name</string>
+    <string name="age">age</string>
+    <string name="image">Image</string>
 </resources>

@@ -131,6 +131,16 @@ public class FirstActivity extends AppCompatActivity implements FirstView {
         runOnUiThread(task);
     }
 
+    @Override
+    public void requestMessage() {
+
+    }
+
+    @Override
+    public void postMessage(String message) {
+
+    }
+
     @OnClick(R.id.buttonLogin)
     public void login() {
         requestLogin();
@@ -138,6 +148,12 @@ public class FirstActivity extends AppCompatActivity implements FirstView {
 
     @OnClick(R.id.buttonRandomMessage)
     public void randomMessage() {
-        message.setText(messages.get(random.nextInt(11)));
+        Runnable updateTask = new Runnable() {
+            @Override
+            public void run() {
+                message.setText(messages.get(random.nextInt(11)));
+            }
+        };
+        message.post(updateTask);
     }
 }
