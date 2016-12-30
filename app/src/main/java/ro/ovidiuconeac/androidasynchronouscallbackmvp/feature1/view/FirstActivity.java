@@ -18,6 +18,7 @@ import java.util.concurrent.Executors;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ro.ovidiuconeac.androidasynchronouscallbackmvp.BuildConfig;
 import ro.ovidiuconeac.androidasynchronouscallbackmvp.R;
 import ro.ovidiuconeac.androidasynchronouscallbackmvp.feature1.model.User;
 import ro.ovidiuconeac.androidasynchronouscallbackmvp.feature1.presenter.FirstPresenter;
@@ -53,6 +54,10 @@ public class FirstActivity extends AppCompatActivity implements FirstView {
         executor = Executors.newCachedThreadPool();
         // This view should not be visible by default, feels like a bug man
         progressBar.setVisibility(View.INVISIBLE);
+        if (BuildConfig.DEBUG) {
+            user.setText("admin");
+            password.setText("admin");
+        }
     }
 
     @Override
