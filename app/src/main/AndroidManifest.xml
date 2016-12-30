@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ro.ovidiuconeac.androidasynchronouscallbackmvp">
+    package="ro.ovidiuconeac.androidasynchronousmvp">
 
     <application
         android:allowBackup="true"
@@ -8,14 +8,14 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="ro.ovidiuconeac.androidasynchronouscallbackmvp.feature1.view.FirstActivity">
+        <activity android:name="ro.ovidiuconeac.androidasynchronousmvp.feature1.view.FirstActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="ro.ovidiuconeac.androidasynchronouscallbackmvp.feature2.view.SecondActivity" />
+        <activity android:name="ro.ovidiuconeac.androidasynchronousmvp.feature2.view.SecondActivity" />
     </application>
 
 </manifest>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AndroidAsynchronousCallbackMVP</string>
+    <string name="app_name">AndroidAsynchronousMVP</string>
     <string name="hint_user">User</string>
     <string name="hint_password">Password</string>
     <string name="login" >Login</string>
