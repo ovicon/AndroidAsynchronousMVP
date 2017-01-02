@@ -6,7 +6,7 @@ The main difference from other implementaions, is that this implementation handl
 
 About the branches:
 - master - this contains the latest development of the implementaion
-- archive-vNO (Where NO is a number like 1, 2, 3...)
+- archive-vNO (Where NO is a number like 1, 2, 3...) - these contain previous versions
 
 
 License
