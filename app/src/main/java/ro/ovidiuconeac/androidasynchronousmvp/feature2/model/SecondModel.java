@@ -20,12 +20,10 @@ public class SecondModel {
 
     private final Random random = new Random();
 
-    private Context context;
     private SparseArray<String> names;
     private SparseArray<String> images;
 
-    public SecondModel(Context context) {
-        this.context = context;
+    public SecondModel() {
         this.names = new SparseArray<>();
         names.put(0, "Ovidiu");
         names.put(1, "Coneac");
@@ -56,14 +54,13 @@ public class SecondModel {
         return random.nextInt(101);
     }
 
-    public Bitmap requestImage() {
+    public Bitmap requestImage(Context context) {
         Util.simulateNetworkLatency(1000);
-        return getRandomBitmap();
+        return getRandomBitmap(context.getAssets());
     }
 
-    private Bitmap getRandomBitmap() {
+    private Bitmap getRandomBitmap(AssetManager assetManager) {
         Bitmap randomBitmap = null;
-        AssetManager assetManager = context.getAssets();
         try {
             InputStream inputStream = assetManager.open(images.get(random.nextInt(5)));
             randomBitmap = BitmapFactory.decodeStream(inputStream);

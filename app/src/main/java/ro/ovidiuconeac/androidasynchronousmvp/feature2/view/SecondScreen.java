@@ -7,7 +7,7 @@ import android.graphics.Bitmap;
  * Created by ovidiu on 12/29/16.
  */
 
-public interface SecondView {
+public interface SecondScreen {
     void requestName();
     void postName(String name);
     void requestAge();

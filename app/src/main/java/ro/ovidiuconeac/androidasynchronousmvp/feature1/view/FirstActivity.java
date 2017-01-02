@@ -22,10 +22,9 @@ import ro.ovidiuconeac.androidasynchronousmvp.BuildConfig;
 import ro.ovidiuconeac.androidasynchronousmvp.R;
 import ro.ovidiuconeac.androidasynchronousmvp.feature1.model.User;
 import ro.ovidiuconeac.androidasynchronousmvp.feature1.presenter.FirstPresenter;
-import ro.ovidiuconeac.androidasynchronousmvp.feature1.presenter.FirstPresenterImpl;
 import ro.ovidiuconeac.androidasynchronousmvp.feature2.view.SecondActivity;
 
-public class FirstActivity extends AppCompatActivity implements FirstView {
+public class FirstActivity extends AppCompatActivity implements FirstScreen {
 
     @BindView(R.id.editTextUser)
     EditText user;
@@ -44,20 +43,23 @@ public class FirstActivity extends AppCompatActivity implements FirstView {
 
     private FirstPresenter presenter;
     private ExecutorService executor;
+    private FirstScreen screen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
         ButterKnife.bind(this);
-        presenter = new FirstPresenterImpl(this);
+        presenter = new FirstPresenter();
         executor = Executors.newCachedThreadPool();
         // This view should not be visible by default, feels like a bug man
         progressBar.setVisibility(View.INVISIBLE);
         if (BuildConfig.DEBUG) {
             user.setText("admin");
             password.setText("admin");
+
         }
+        screen = this;
     }
 
     @Override
@@ -65,6 +67,7 @@ public class FirstActivity extends AppCompatActivity implements FirstView {
         presenter = null;
         executor.shutdown();
         executor = null;
+        screen = null;
         super.onDestroy();
     }
 
@@ -97,7 +100,7 @@ public class FirstActivity extends AppCompatActivity implements FirstView {
             public void run() {
                 android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
                 runOnUiThread(disableUiTask);
-                presenter.requestLogin(new User(u, p));
+                presenter.requestLogin(screen, new User(u, p));
                 runOnUiThread(enableUiTask);
             }
         };
@@ -129,7 +132,7 @@ public class FirstActivity extends AppCompatActivity implements FirstView {
             @Override
             public void run() {
                 android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
-                presenter.requestMessage();
+                presenter.requestMessage(screen);
             }
         };
         executor.submit(task);

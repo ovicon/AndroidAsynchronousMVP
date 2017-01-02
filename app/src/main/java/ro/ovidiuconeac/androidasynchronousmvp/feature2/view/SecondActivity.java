@@ -18,10 +18,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ro.ovidiuconeac.androidasynchronousmvp.R;
+import ro.ovidiuconeac.androidasynchronousmvp.feature2.model.SecondModel;
 import ro.ovidiuconeac.androidasynchronousmvp.feature2.presentor.SecondPresenter;
-import ro.ovidiuconeac.androidasynchronousmvp.feature2.presentor.SecondPresenterImpl;
 
-public class SecondActivity extends AppCompatActivity implements SecondView {
+public class SecondActivity extends AppCompatActivity implements SecondScreen {
 
     @BindView(R.id.progressBarName)
     ProgressBar progressBarName;
@@ -52,14 +52,16 @@ public class SecondActivity extends AppCompatActivity implements SecondView {
 
     private SecondPresenter secondPresenter;
     private ExecutorService executor;
+    private SecondScreen screen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
         ButterKnife.bind(this);
-        secondPresenter = new SecondPresenterImpl(this);
+        secondPresenter = new SecondPresenter();
         executor = Executors.newCachedThreadPool();
+        screen = this;
     }
 
     @Override
@@ -96,7 +98,7 @@ public class SecondActivity extends AppCompatActivity implements SecondView {
             public void run() {
                 android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
                 runOnUiThread(disableUiTask);
-                secondPresenter.requestName();
+                secondPresenter.requestName(screen);
                 runOnUiThread(enableUiTask);
             }
         };
@@ -140,7 +142,7 @@ public class SecondActivity extends AppCompatActivity implements SecondView {
             public void run() {
                 android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
                 runOnUiThread(disableUiTask);
-                secondPresenter.requestAge();
+                secondPresenter.requestAge(screen);
                 runOnUiThread(enableUiTask);
             }
         };
@@ -182,7 +184,7 @@ public class SecondActivity extends AppCompatActivity implements SecondView {
             public void run() {
                 android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
                 runOnUiThread(disableUiTask);
-                secondPresenter.requestImage();
+                secondPresenter.requestImage(screen);
                 runOnUiThread(enableUiTask);
             }
         };

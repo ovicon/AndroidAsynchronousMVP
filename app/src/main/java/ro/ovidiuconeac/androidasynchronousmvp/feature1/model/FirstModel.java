@@ -5,7 +5,6 @@ import android.util.SparseArray;
 import java.util.Random;
 
 import ro.ovidiuconeac.androidasynchronousmvp.common.Util;
-import ro.ovidiuconeac.androidasynchronousmvp.feature1.presenter.FirstPresenter;
 
 /**
  * Created by ovidiu on 12/29/16.
