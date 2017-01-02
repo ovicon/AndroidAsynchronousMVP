@@ -1,0 +1,2 @@
+- how to test the requestImage method for the second model and presenter
+- hot to do user interface tests

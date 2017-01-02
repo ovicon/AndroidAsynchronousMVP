@@ -1,7 +1,5 @@
 package ro.ovidiuconeac.androidasynchronousmvp.feature2;
 
-import android.content.Context;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,8 +8,6 @@ import ro.ovidiuconeac.androidasynchronousmvp.feature2.model.SecondModel;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
 /**
  * Created by ovidiu on 1/2/17.

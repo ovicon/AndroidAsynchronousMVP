@@ -1,7 +1,5 @@
 package ro.ovidiuconeac.androidasynchronousmvp.feature2;
 
-import android.graphics.Bitmap;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,7 +8,6 @@ import ro.ovidiuconeac.androidasynchronousmvp.feature2.presentor.SecondPresenter
 import ro.ovidiuconeac.androidasynchronousmvp.feature2.view.SecondScreen;
 
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
