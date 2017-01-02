@@ -20,6 +20,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ro.ovidiuconeac.androidasynchronousmvp.BuildConfig;
 import ro.ovidiuconeac.androidasynchronousmvp.R;
+import ro.ovidiuconeac.androidasynchronousmvp.common.Util;
 import ro.ovidiuconeac.androidasynchronousmvp.feature1.model.User;
 import ro.ovidiuconeac.androidasynchronousmvp.feature1.presenter.FirstPresenter;
 import ro.ovidiuconeac.androidasynchronousmvp.feature2.view.SecondActivity;
@@ -109,11 +110,13 @@ public class FirstActivity extends AppCompatActivity implements FirstScreen {
 
     @Override
     public void doLogin() {
+        Util.simulateNetworkLatency(3000);
         startActivity(new Intent(this, SecondActivity.class));
     }
 
     @Override
     public void showLoginError() {
+        Util.simulateNetworkLatency(3000);
         final Context _this = this;
         Runnable task = new Runnable() {
             @Override

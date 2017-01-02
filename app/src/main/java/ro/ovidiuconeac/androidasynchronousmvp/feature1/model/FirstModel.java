@@ -1,7 +1,9 @@
 package ro.ovidiuconeac.androidasynchronousmvp.feature1.model;
 
-import android.util.SparseArray;
+import android.annotation.SuppressLint;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import ro.ovidiuconeac.androidasynchronousmvp.common.Util;
@@ -15,11 +17,12 @@ public class FirstModel {
     private static final String USER = "admin";
     private static final String PASSWORD = "admin";
 
-    private SparseArray<String> messages;
+    private Map<Integer, String> messages;
     private Random random;
 
+    @SuppressLint("UseSparseArrays")
     public FirstModel() {
-        messages = new SparseArray<>();
+        messages = new HashMap<>();
         messages.put(0, "In teaching others we teach ourselves.");
         messages.put(1, "Don’t regret the past, just learn from it.");
         messages.put(2, "It does not matter how slowly you go as long as you do not stop.");
@@ -35,7 +38,6 @@ public class FirstModel {
     }
 
     public boolean isValid(User user) {
-        Util.simulateNetworkLatency(6000);
         boolean valid = false;
         if(USER.equals(user.getUser()) && PASSWORD.equals(user.getPassword())) {
             valid = true;

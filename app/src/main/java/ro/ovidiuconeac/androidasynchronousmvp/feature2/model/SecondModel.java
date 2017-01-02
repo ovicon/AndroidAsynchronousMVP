@@ -1,13 +1,16 @@
 package ro.ovidiuconeac.androidasynchronousmvp.feature2.model;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.test.InstrumentationTestCase;
 import android.util.SparseArray;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Random;
 
 import ro.ovidiuconeac.androidasynchronousmvp.common.Util;
@@ -20,11 +23,12 @@ public class SecondModel {
 
     private final Random random = new Random();
 
-    private SparseArray<String> names;
-    private SparseArray<String> images;
+    private HashMap<Integer, String> names;
+    private HashMap<Integer, String> images;
 
+    @SuppressLint("UseSparseArrays")
     public SecondModel() {
-        this.names = new SparseArray<>();
+        this.names = new HashMap<>();
         names.put(0, "Ovidiu");
         names.put(1, "Coneac");
         names.put(2, "Lucian");
@@ -36,7 +40,7 @@ public class SecondModel {
         names.put(8, "Adriana");
         names.put(9, "Cosmin");
         names.put(10, "Andra");
-        this.images = new SparseArray<>();
+        this.images = new HashMap<>();
         images.put(0, "img1.jpg");
         images.put(1, "img2.jpg");
         images.put(2, "img3.png");
@@ -45,17 +49,14 @@ public class SecondModel {
     }
 
     public String requestName() {
-        Util.simulateNetworkLatency(2000);
         return names.get(random.nextInt(11));
     }
 
     public int requestAge() {
-        Util.simulateNetworkLatency(3000);
         return random.nextInt(101);
     }
 
     public Bitmap requestImage(Context context) {
-        Util.simulateNetworkLatency(1000);
         return getRandomBitmap(context.getAssets());
     }
 

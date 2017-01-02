@@ -18,6 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ro.ovidiuconeac.androidasynchronousmvp.R;
+import ro.ovidiuconeac.androidasynchronousmvp.common.Util;
 import ro.ovidiuconeac.androidasynchronousmvp.feature2.model.SecondModel;
 import ro.ovidiuconeac.androidasynchronousmvp.feature2.presentor.SecondPresenter;
 
@@ -107,6 +108,7 @@ public class SecondActivity extends AppCompatActivity implements SecondScreen {
 
     @Override
     public void postName(final String name) {
+        Util.simulateNetworkLatency(6000);
         Runnable task = new Runnable() {
             @Override
             public void run() {
@@ -151,6 +153,7 @@ public class SecondActivity extends AppCompatActivity implements SecondScreen {
 
     @Override
     public void postAge(final int age) {
+        Util.simulateNetworkLatency(3000);
         Runnable task = new Runnable() {
             @Override
             public void run() {
@@ -193,6 +196,7 @@ public class SecondActivity extends AppCompatActivity implements SecondScreen {
 
     @Override
     public void postImage(final Bitmap bitmap) {
+        Util.simulateNetworkLatency(3000);
         Runnable task = new Runnable() {
             @Override
             public void run() {

@@ -1,7 +1,5 @@
 package ro.ovidiuconeac.androidasynchronousmvp.feature2.presentor;
 
-import android.content.Context;
-
 import ro.ovidiuconeac.androidasynchronousmvp.feature2.model.SecondModel;
 import ro.ovidiuconeac.androidasynchronousmvp.feature2.view.SecondScreen;
 
