@@ -8,7 +8,6 @@ About the branches:
 - master - this contains the latest version
 - archive-vNO (Where NO is a number like 1, 2, 3...) - these contain previous versions
 
-
 License
 -------
 
