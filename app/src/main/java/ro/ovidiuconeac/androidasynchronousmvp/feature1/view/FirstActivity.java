@@ -3,6 +3,7 @@ package ro.ovidiuconeac.androidasynchronousmvp.feature1.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Process;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -100,16 +101,6 @@ public class FirstActivity extends AppCompatActivity implements FirstScreen {
 
     @Override
     public void requestLogin() {
-        final Runnable enableUiTask = new Runnable() {
-            @Override
-            public void run() {
-                android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_MORE_FAVORABLE);
-                user.setEnabled(true);
-                password.setEnabled(true);
-                login.setEnabled(true);
-                progressBar.setVisibility(View.INVISIBLE);
-            }
-        };
         final Runnable disableUiTask = new Runnable() {
             @Override
             public void run() {
@@ -128,7 +119,6 @@ public class FirstActivity extends AppCompatActivity implements FirstScreen {
                 android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
                 runOnUiThread(disableUiTask);
                 presenter.requestLogin(screen, new User(u, p));
-                runOnUiThread(enableUiTask);
             }
         };
         executor.submit(requestLoginTask);
@@ -144,6 +134,17 @@ public class FirstActivity extends AppCompatActivity implements FirstScreen {
     public void showLoginError() {
         Util.simulateNetworkLatency(3000);
         final Context _this = this;
+        final Runnable enableUiTask = new Runnable() {
+            @Override
+            public void run() {
+                android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_MORE_FAVORABLE);
+                user.setEnabled(true);
+                password.setEnabled(true);
+                login.setEnabled(true);
+                progressBar.setVisibility(View.INVISIBLE);
+            }
+        };
+        runOnUiThread(enableUiTask);
         Runnable task = new Runnable() {
             @Override
             public void run() {
