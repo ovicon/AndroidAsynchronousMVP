@@ -42,6 +42,12 @@ public class FirstActivity extends AppCompatActivity implements FirstScreen {
     @BindView(R.id.textViewRandomMessage)
     TextView message;
 
+    private final static String USER = "user";
+    private final static String PASSWORD = "password";
+    private final static String PROGRESS_BAR = "progressBa";
+    private final static String LOGIN = "login";
+    private final static String MESSAGE = "message";
+
     private FirstPresenter presenter;
     private ExecutorService executor;
     private FirstScreen screen;
@@ -56,11 +62,31 @@ public class FirstActivity extends AppCompatActivity implements FirstScreen {
         // This view should not be visible by default, feels like a bug man
         progressBar.setVisibility(View.INVISIBLE);
         if (BuildConfig.DEBUG) {
-            user.setText("admin");
+            user.setText("admina");
             password.setText("admin");
 
         }
         screen = this;
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean(USER, user.isEnabled());
+        outState.putBoolean(PASSWORD, password.isEnabled());
+        outState.putBoolean(LOGIN, login.isEnabled());
+        outState.putInt(PROGRESS_BAR, progressBar.getVisibility());
+        outState.putString(MESSAGE, message.getText().toString());
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        user.setEnabled(savedInstanceState.getBoolean(USER));
+        password.setEnabled(savedInstanceState.getBoolean(PASSWORD));
+        login.setEnabled(savedInstanceState.getBoolean(LOGIN));
+        progressBar.setVisibility(savedInstanceState.getInt(PROGRESS_BAR) == View.VISIBLE ? View.VISIBLE : View.INVISIBLE);
+        message.setText(savedInstanceState.getString(MESSAGE));
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
     @Override
