@@ -26,8 +26,6 @@ import ro.ovidiuconeac.androidasynchronousmvp.feature2.view.SecondActivity;
 
 public class FirstActivity extends AppCompatActivity implements FirstScreen {
 
-    private FirstPresenter presenter;
-
     @BindView(R.id.editTextUser)
     EditText user;
 
@@ -49,7 +47,7 @@ public class FirstActivity extends AppCompatActivity implements FirstScreen {
     private final static String LOGIN = "login";
     private final static String MESSAGE = "message";
 
-    private FirstScreen screen;
+    private FirstPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +62,6 @@ public class FirstActivity extends AppCompatActivity implements FirstScreen {
             password.setText("admin");
 
         }
-        screen = this;
         presenter = FirstPresenter.getInstance(this);
     }
 
@@ -92,7 +89,6 @@ public class FirstActivity extends AppCompatActivity implements FirstScreen {
     @Override
     protected void onDestroy() {
         presenter = null;
-        screen = null;
         super.onDestroy();
     }
 
@@ -121,17 +117,13 @@ public class FirstActivity extends AppCompatActivity implements FirstScreen {
     @Override
     public void showLoginError() {
         enableUi(true);
-        user.setEnabled(true);
-        password.setEnabled(true);
-        login.setEnabled(true);
-
         Toast.makeText(this, getString(R.string.login_error), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     @OnClick(R.id.buttonRequestMessage)
     public void requestMessage() {
-        presenter.requestMessage(screen);
+        presenter.requestMessage(this);
     }
 
     @Override
