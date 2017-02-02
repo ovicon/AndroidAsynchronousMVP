@@ -1,11 +1,11 @@
-package ro.ovidiuconeac.androidasynchronousmvp.feature2;
+package ro.ovidiuconeac.androidasynchronousmvp.features.feature2;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import ro.ovidiuconeac.androidasynchronousmvp.feature2.presentor.SecondPresenter;
-import ro.ovidiuconeac.androidasynchronousmvp.feature2.view.SecondScreen;
+import ro.ovidiuconeac.androidasynchronousmvp.features.feature2.presentor.SecondPresenter;
+import ro.ovidiuconeac.androidasynchronousmvp.features.feature2.view.SecondScreen;
 
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.anyInt;

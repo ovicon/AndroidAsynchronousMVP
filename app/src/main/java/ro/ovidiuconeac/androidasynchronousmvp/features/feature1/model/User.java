@@ -1,4 +1,4 @@
-package ro.ovidiuconeac.androidasynchronousmvp.feature1.model;
+package ro.ovidiuconeac.androidasynchronousmvp.features.feature1.model;
 
 /**
  * Created by ovidiu on 12/29/16.

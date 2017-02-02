@@ -1,29 +1,30 @@
-package ro.ovidiuconeac.androidasynchronousmvp.feature1.presenter;
+package ro.ovidiuconeac.androidasynchronousmvp.features.feature1.presenter;
 
 import android.os.AsyncTask;
 
+import java.util.UUID;
+
 import ro.ovidiuconeac.androidasynchronousmvp.common.Util;
-import ro.ovidiuconeac.androidasynchronousmvp.feature1.model.FirstModel;
-import ro.ovidiuconeac.androidasynchronousmvp.feature1.model.User;
-import ro.ovidiuconeac.androidasynchronousmvp.feature1.view.FirstScreen;
+import ro.ovidiuconeac.androidasynchronousmvp.features.Presenter;
+import ro.ovidiuconeac.androidasynchronousmvp.features.Screen;
+import ro.ovidiuconeac.androidasynchronousmvp.features.feature1.model.FirstModel;
+import ro.ovidiuconeac.androidasynchronousmvp.features.feature1.model.User;
+import ro.ovidiuconeac.androidasynchronousmvp.features.feature1.view.FirstScreen;
 
 /**
  * Created by ovidiu on 12/29/16.
  */
 
-public final class FirstPresenter {
+public final class FirstPresenter implements Presenter {
 
-    private static FirstPresenter presenter;
-    private static FirstScreen screen;
+    private UUID uuid;
+    private FirstScreen screen;
+    private FirstModel model;
 
-    private FirstModel model = new FirstModel();
-
-    public static FirstPresenter getInstance(FirstScreen screen) {
-        if (presenter == null) {
-            presenter = new FirstPresenter();
-        }
-        FirstPresenter.screen = screen;
-        return presenter;
+    public FirstPresenter(FirstScreen screen) {
+        this.uuid = UUID.randomUUID();
+        this.screen = screen;
+        this.model = new FirstModel();
     }
 
     public void requestLogin(final User user) {
@@ -61,5 +62,15 @@ public final class FirstPresenter {
                 screen.postMessage(message);
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    }
+
+    @Override
+    public void setScreen(Screen screen) {
+        this.screen = (FirstScreen) screen;
+    }
+
+    @Override
+    public UUID getUuid() {
+        return uuid;
     }
 }

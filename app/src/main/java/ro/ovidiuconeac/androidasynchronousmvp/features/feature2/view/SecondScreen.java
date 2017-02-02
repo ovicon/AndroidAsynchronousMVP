@@ -1,13 +1,15 @@
-package ro.ovidiuconeac.androidasynchronousmvp.feature2.view;
+package ro.ovidiuconeac.androidasynchronousmvp.features.feature2.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+
+import ro.ovidiuconeac.androidasynchronousmvp.features.Screen;
 
 /**
  * Created by ovidiu on 12/29/16.
  */
 
-public interface SecondScreen {
+public interface SecondScreen extends Screen {
     void requestName();
     void postName(String name);
     void requestAge();

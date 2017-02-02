@@ -1,19 +1,15 @@
-package ro.ovidiuconeac.androidasynchronousmvp.feature2.model;
+package ro.ovidiuconeac.androidasynchronousmvp.features.feature2.model;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.test.InstrumentationTestCase;
-import android.util.SparseArray;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Random;
-
-import ro.ovidiuconeac.androidasynchronousmvp.common.Util;
 
 /**
  * Created by ovidiu on 12/29/16.
