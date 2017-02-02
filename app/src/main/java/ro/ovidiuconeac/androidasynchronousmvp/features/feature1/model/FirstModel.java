@@ -8,6 +8,7 @@ import java.util.Random;
 
 /**
  * Created by ovidiu on 12/29/16.
+ *
  */
 
 public class FirstModel {

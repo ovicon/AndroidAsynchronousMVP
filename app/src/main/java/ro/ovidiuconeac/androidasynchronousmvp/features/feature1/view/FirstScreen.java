@@ -4,6 +4,7 @@ import ro.ovidiuconeac.androidasynchronousmvp.features.Screen;
 
 /**
  * Created by ovidiu on 12/29/16.
+ *
  */
 
 public interface FirstScreen extends Screen {

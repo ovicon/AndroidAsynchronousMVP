@@ -2,9 +2,13 @@ package ro.ovidiuconeac.androidasynchronousmvp.common;
 
 /**
  * Created by ovidiu on 12/29/16.
+ *
+ * A utility class whose purpose it only to simulate
+ * a network latency. What is does it to delay the
+ * running thread by the specified number of milliseconds.
  */
 
-public final class Util {
+public abstract class Util {
 
     public static void simulateNetworkLatency(int millis) {
         // Pause current thread

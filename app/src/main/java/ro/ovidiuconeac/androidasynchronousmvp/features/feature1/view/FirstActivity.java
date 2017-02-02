@@ -1,8 +1,11 @@
 package ro.ovidiuconeac.androidasynchronousmvp.features.feature1.view;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -138,5 +141,28 @@ public class FirstActivity extends AppCompatActivity implements FirstScreen {
     @OnClick(R.id.buttonLogin)
     public void login() {
         requestLogin();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.visit_developer: {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(getString(R.string.
+                        developer)));
+                startActivity(intent);
+                break;
+            }
+            default: {
+                break;
+            }
+        }
+        return true;
     }
 }

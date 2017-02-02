@@ -13,8 +13,8 @@ import ro.ovidiuconeac.androidasynchronousmvp.features.feature1.view.FirstScreen
 
 /**
  * Created by ovidiu on 12/29/16.
+ *
  */
-
 public final class FirstPresenter implements Presenter {
 
     private UUID uuid;

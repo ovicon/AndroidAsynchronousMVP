@@ -15,8 +15,8 @@ import ro.ovidiuconeac.androidasynchronousmvp.features.feature2.view.SecondScree
 
 /**
  * Created by ovidiu on 12/29/16.
+ *
  */
-@Ignore
 public final class SecondPresenter implements Presenter {
 
     private UUID uuid;

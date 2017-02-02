@@ -8,4 +8,6 @@
     <string name="name">Name</string>
     <string name="age">age</string>
     <string name="image">Image</string>
+    <string name="visit_developer">Visit developer</string>
+    <string name="developer">http://www.ovidiuconeac.ro/</string>
 </resources>

@@ -2,11 +2,12 @@ package ro.ovidiuconeac.androidasynchronousmvp.features.feature1.model;
 
 /**
  * Created by ovidiu on 12/29/16.
+ *
  */
 
 public class User {
-    public String user;
-    public String password;
+    private String user;
+    private String password;
 
     public User(String user, String password) {
         this.user = user;

@@ -1,7 +1,5 @@
 package ro.ovidiuconeac.androidasynchronousmvp.cache;
 
-import android.preference.Preference;
-
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +14,11 @@ import ro.ovidiuconeac.androidasynchronousmvp.features.Presenter;
  * mechanism to persist presenters during activity
  * orientation change.
  *
+ * A disadvantage of the caching class is that it
+ * never deletes the unused presenters.
+ *
+ * A solution, e.g. a daemon, must be implemented
+ * to remove the unused presenters.
  */
 public class Cache implements Serializable {
 

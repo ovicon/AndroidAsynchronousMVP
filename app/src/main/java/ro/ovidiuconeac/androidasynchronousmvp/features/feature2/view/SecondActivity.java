@@ -1,12 +1,16 @@
 package ro.ovidiuconeac.androidasynchronousmvp.features.feature2.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,7 +25,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ro.ovidiuconeac.androidasynchronousmvp.R;
 import ro.ovidiuconeac.androidasynchronousmvp.cache.Cache;
-import ro.ovidiuconeac.androidasynchronousmvp.features.feature1.presenter.FirstPresenter;
 import ro.ovidiuconeac.androidasynchronousmvp.features.feature2.presentor.SecondPresenter;
 
 public class SecondActivity extends AppCompatActivity implements SecondScreen {
@@ -69,7 +72,6 @@ public class SecondActivity extends AppCompatActivity implements SecondScreen {
     private final static String IMG_IMG = "img_img";
     private final static String IMG_PRG = "img_prg";
 
-
     private SecondPresenter presenter;
 
     @Override
@@ -93,13 +95,13 @@ public class SecondActivity extends AppCompatActivity implements SecondScreen {
         outState.putString(AGE_TXT, editTextAge.getText().toString());
         outState.putInt(AGE_PRG, progressBarAge.getVisibility());
         // Image
-        outState.putBoolean(IMG_BTN, buttonAge.isEnabled());
+        outState.putBoolean(IMG_BTN, buttonImage.isEnabled());
         Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] bitmapdata = stream.toByteArray();
         outState.putByteArray(IMG_IMG, bitmapdata);
-        outState.putInt(IMG_PRG, progressBarAge.getVisibility());
+        outState.putInt(IMG_PRG, progressBarImage.getVisibility());
         // Save presenter instance
         outState.putString(PRESENTER, presenter.getUuid().toString());
         Cache.getInstance().getCache().put(presenter.getUuid(), presenter);
@@ -119,11 +121,11 @@ public class SecondActivity extends AppCompatActivity implements SecondScreen {
         progressBarAge.setVisibility(savedInstanceState.getInt(AGE_PRG)
                 == View.VISIBLE ? View.VISIBLE : View.INVISIBLE);
         // Image
-        buttonImage.setEnabled(savedInstanceState.getBoolean(AGE_BTN));
+        buttonImage.setEnabled(savedInstanceState.getBoolean(IMG_BTN));
         byte[] bitmapdata = savedInstanceState.getByteArray(IMG_IMG);
         Drawable image = new BitmapDrawable(getResources(),BitmapFactory.decodeByteArray(bitmapdata, 0, bitmapdata.length));
         imageView.setImageDrawable(image);
-        progressBarImage.setVisibility(savedInstanceState.getInt(AGE_PRG)
+        progressBarImage.setVisibility(savedInstanceState.getInt(IMG_PRG)
                 == View.VISIBLE ? View.VISIBLE : View.INVISIBLE);
         // Restore presenter instance
         presenter = (SecondPresenter) Cache.getInstance().getCache().get(UUID.fromString(savedInstanceState.getString(PRESENTER)));
@@ -183,5 +185,28 @@ public class SecondActivity extends AppCompatActivity implements SecondScreen {
     @Override
     public Context getContext() {
         return getApplicationContext();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.visit_developer: {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(getString(R.string.
+                        developer)));
+                startActivity(intent);
+                break;
+            }
+            default: {
+                break;
+            }
+        }
+        return true;
     }
 }
