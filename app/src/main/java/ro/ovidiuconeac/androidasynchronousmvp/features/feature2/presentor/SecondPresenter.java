@@ -3,6 +3,8 @@ package ro.ovidiuconeac.androidasynchronousmvp.features.feature2.presentor;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 
+import org.junit.Ignore;
+
 import java.util.UUID;
 
 import ro.ovidiuconeac.androidasynchronousmvp.common.Util;
@@ -14,7 +16,7 @@ import ro.ovidiuconeac.androidasynchronousmvp.features.feature2.view.SecondScree
 /**
  * Created by ovidiu on 12/29/16.
  */
-
+@Ignore
 public final class SecondPresenter implements Presenter {
 
     private UUID uuid;
