@@ -21,6 +21,7 @@ import butterknife.OnClick;
 import ro.ovidiuconeac.androidasynchronousmvp.BuildConfig;
 import ro.ovidiuconeac.androidasynchronousmvp.R;
 import ro.ovidiuconeac.androidasynchronousmvp.cache.Cache;
+import ro.ovidiuconeac.androidasynchronousmvp.features.Presenter;
 import ro.ovidiuconeac.androidasynchronousmvp.features.feature1.model.User;
 import ro.ovidiuconeac.androidasynchronousmvp.features.feature1.presenter.FirstPresenter;
 import ro.ovidiuconeac.androidasynchronousmvp.features.feature2.view.SecondActivity;
@@ -79,7 +80,7 @@ public class FirstActivity extends AppCompatActivity implements FirstScreen {
         outState.putString(MESSAGE, message.getText().toString());
         // Save presenter instance
         outState.putString(PRESENTER, presenter.getUuid().toString());
-        Cache.getInstance().getCache().put(presenter.getUuid(), presenter);
+        cachePresenter(presenter);
         super.onSaveInstanceState(outState);
     }
 
@@ -93,8 +94,7 @@ public class FirstActivity extends AppCompatActivity implements FirstScreen {
                 == View.VISIBLE ? View.VISIBLE : View.INVISIBLE);
         message.setText(savedInstanceState.getString(MESSAGE));
         // Restore presenter instance
-        presenter = (FirstPresenter) Cache.getInstance().getCache().get(UUID.fromString(savedInstanceState.getString(PRESENTER)));
-        presenter.setScreen(this);
+        restorePresenter(UUID.fromString(savedInstanceState.getString(PRESENTER)));
         super.onRestoreInstanceState(savedInstanceState);
     }
 
@@ -164,5 +164,16 @@ public class FirstActivity extends AppCompatActivity implements FirstScreen {
             }
         }
         return true;
+    }
+
+    @Override
+    public void cachePresenter(Presenter presenter) {
+        Cache.getInstance().cachePresenterFor(presenter.getUuid(), presenter);
+    }
+
+    @Override
+    public void restorePresenter(UUID uuid) {
+        presenter = (FirstPresenter) Cache.getInstance().restorePresenterFor(uuid);
+        presenter.setScreen(this);
     }
 }

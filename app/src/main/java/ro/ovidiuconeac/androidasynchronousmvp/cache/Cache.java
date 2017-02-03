@@ -36,7 +36,13 @@ public class Cache implements Serializable {
         cache = new HashMap<>();
     }
 
-    public Map<UUID, Presenter> getCache() {
-        return cache;
+    public void cachePresenterFor(UUID uuid, Presenter presenter) {
+        cache.put(uuid, presenter);
+    }
+
+    public Presenter restorePresenterFor(UUID uuid) {
+        Presenter presenter = cache.get(uuid);
+        cache.remove(presenter);
+        return presenter;
     }
 }

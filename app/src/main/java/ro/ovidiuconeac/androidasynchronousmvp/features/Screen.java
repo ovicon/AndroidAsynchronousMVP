@@ -1,5 +1,7 @@
 package ro.ovidiuconeac.androidasynchronousmvp.features;
 
+import java.util.UUID;
+
 /**
  * Created by ovidiu on 2/2/17.
  *
@@ -11,4 +13,6 @@ package ro.ovidiuconeac.androidasynchronousmvp.features;
  */
 
 public interface Screen {
+    void cachePresenter(Presenter presenter);
+    void restorePresenter(UUID uuid);
 }

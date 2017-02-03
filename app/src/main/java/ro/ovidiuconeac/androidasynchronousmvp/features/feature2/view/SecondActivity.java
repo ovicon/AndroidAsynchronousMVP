@@ -25,6 +25,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ro.ovidiuconeac.androidasynchronousmvp.R;
 import ro.ovidiuconeac.androidasynchronousmvp.cache.Cache;
+import ro.ovidiuconeac.androidasynchronousmvp.features.Presenter;
+import ro.ovidiuconeac.androidasynchronousmvp.features.feature1.presenter.FirstPresenter;
 import ro.ovidiuconeac.androidasynchronousmvp.features.feature2.presentor.SecondPresenter;
 
 public class SecondActivity extends AppCompatActivity implements SecondScreen {
@@ -104,7 +106,7 @@ public class SecondActivity extends AppCompatActivity implements SecondScreen {
         outState.putInt(IMG_PRG, progressBarImage.getVisibility());
         // Save presenter instance
         outState.putString(PRESENTER, presenter.getUuid().toString());
-        Cache.getInstance().getCache().put(presenter.getUuid(), presenter);
+        cachePresenter(presenter);
         super.onSaveInstanceState(outState);
     }
 
@@ -128,8 +130,7 @@ public class SecondActivity extends AppCompatActivity implements SecondScreen {
         progressBarImage.setVisibility(savedInstanceState.getInt(IMG_PRG)
                 == View.VISIBLE ? View.VISIBLE : View.INVISIBLE);
         // Restore presenter instance
-        presenter = (SecondPresenter) Cache.getInstance().getCache().get(UUID.fromString(savedInstanceState.getString(PRESENTER)));
-        presenter.setScreen(this);
+        restorePresenter(UUID.fromString(savedInstanceState.getString(PRESENTER)));
         super.onRestoreInstanceState(savedInstanceState);
     }
 
@@ -208,5 +209,16 @@ public class SecondActivity extends AppCompatActivity implements SecondScreen {
             }
         }
         return true;
+    }
+
+    @Override
+    public void cachePresenter(Presenter presenter) {
+        Cache.getInstance().cachePresenterFor(presenter.getUuid(), presenter);
+    }
+
+    @Override
+    public void restorePresenter(UUID uuid) {
+        presenter = (SecondPresenter) Cache.getInstance().restorePresenterFor(uuid);
+        presenter.setScreen(this);
     }
 }
