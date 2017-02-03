@@ -40,7 +40,6 @@ public class Cache implements Serializable {
     }
 }
 ```
-
 How does it work?
 
 During orientation change, the Android OS calls two callback methods, where the developer can save and restore the view state. These callbacks are: __onSaveInstanceState__ and __onRestoreInstanceState__. 
@@ -60,7 +59,6 @@ When __onSaveInstanceState__ is called, the presenter is cached:
         Cache.getInstance().cachePresenterFor(presenter.getUuid(), presenter);
     }
 ```
-
 The reason each presenter instance has a UUID, is to handle the case of multiple instances of the same view. Each view has to have its own presenter, so cache will contain multiple instances of the same presenter class. When the view is restored, it has to find the appropriate presenter in the cache.
 
 When __onRestoreInstanceState__ is called, the view restores its presenter from the cache, and the presenter restores its reference to the view:
@@ -97,7 +95,6 @@ Asynchronous operations are handled in the presenters. Each presenter acts as a 
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 ```
-
 Known issues
 -------
 How to test unit test the presenters?
