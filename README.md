@@ -95,7 +95,7 @@ Asynchronous operations are handled in the presenters. Each presenter acts as a 
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 ```
-If you are looking for a basic foundation only, upon which to build your own applications, based on this proposed MVP solution, please take a look at the following repository: [Boilerpart code for asynchronous MVP design for Android, without 3rd party libraries.](https://github.com/ovicon/AndroidAsynchronousMVPBoilerpart)
+If you are looking for a basic foundation upon which to build your own applications, based on this proposed MVP solution, please take a look at the following repository: [Boilerpart code for asynchronous MVP design for Android, without 3rd party libraries.](https://github.com/ovicon/AndroidAsynchronousMVPBoilerpart)
 
 Boilerpart code for asynchronous MVP design for Android, without 3rd party libraries.
 
