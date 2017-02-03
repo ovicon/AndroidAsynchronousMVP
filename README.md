@@ -1,12 +1,106 @@
 # AndroidAsynchronousMVP
 
-An attempt to build a simple asynchronous MVP design for Android, without using any 3rd party libraries. The example uses two "features" to demonstrate asynchronicity.
+Description
+-------
+Asynchronous MVP design for Android, without 3rd party libraries.
 
-The main difference from other implementations, is that this implementation handles user interface "tasks", in separate threads started from the view, meaning that any long running operations on this threads, will not degrade the user experience provided by the view.
+Problem
+-------
+How to implement a simple, decoupled, testable, asynchronous MVP desing, without using any 3rd party libraries, that can also handle screen orientation.
 
-About the branches:
-- master - this contains the latest version
-- archive-vNO (Where NO is a number like 1, 2, 3...) - these contain previous versions
+Solution
+-------
+The proposed solution for handling screen orientation, is a simple cache mechanism for the presenters: 
+
+```java
+public class Cache implements Serializable {
+
+    private static Cache ourInstance;
+    private Map<UUID, Presenter> cache;
+
+    public static Cache getInstance() {
+        if (ourInstance == null) {
+            ourInstance = new Cache();
+        }
+        return ourInstance;
+    }
+
+    private Cache() {
+        cache = new HashMap<>();
+    }
+
+    public void cachePresenterFor(UUID uuid, Presenter presenter) {
+        cache.put(uuid, presenter);
+    }
+
+    public Presenter restorePresenterFor(UUID uuid) {
+        Presenter presenter = cache.get(uuid);
+        cache.remove(presenter);
+        return presenter;
+    }
+}
+```
+
+How does it work?
+
+During orientation change, the Android OS calls two callback methods, where the developer can save and restore the view state. These callbacks are: __onSaveInstanceState__ and __onRestoreInstanceState__. 
+
+When __onSaveInstanceState__ is called, the presenter is cached: 
+
+```java
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        // Save presenter instance
+        outState.putString(PRESENTER, presenter.getUuid().toString());
+        cachePresenter(presenter);
+    }
+    
+    @Override
+    public void cachePresenter(Presenter presenter) {
+        Cache.getInstance().cachePresenterFor(presenter.getUuid(), presenter);
+    }
+```
+
+The reason each presenter instance has a UUID, is to handle the case of multiple instances of the same view. Each view has to have its own presenter, so cache will contain multiple instances of the same presenter class. When the view is restored, it has to find the appropriate presenter in the cache.
+
+When __onRestoreInstanceState__ is called, the view restores its presenter from the cache, and the presenter restores its reference to the view:
+
+```java
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        // Restore presenter instance
+        restorePresenter(UUID.fromString(savedInstanceState.getString(PRESENTER)));
+    }
+    
+    @Override
+    public void restorePresenter(UUID uuid) {
+        presenter = (FirstPresenter) Cache.getInstance().restorePresenterFor(uuid);
+        presenter.setScreen(this);
+    }
+```
+Asynchronous operations are handled in the presenters. Each presenter acts as a "bridge" between the view and the model (business logic). This "bridge" mechanism is implemented with __AsyncTasks__. Each __AsyncTask__ orchestrates the flow of date between the view and the model, performing background operations and publishing the results on the UI.
+
+```java
+    public void requestMessage(final FirstScreen screen) {
+        new AsyncTask<Void, Void, String>() {
+
+            @Override
+            protected String doInBackground(Void... params) {
+                return model.requestMessage();
+            }
+
+            @Override
+            protected void onPostExecute(String message) {
+                super.onPostExecute(message);
+                screen.postMessage(message);
+            }
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    }
+```
+
+Known issues
+-------
+How to test unit test the presenters?
 
 License
 -------
