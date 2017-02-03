@@ -10,13 +10,40 @@ How to implement a simple, decoupled, testable, asynchronous MVP desing, without
 
 Solution
 -------
-The proposed solution for handling screen orientation, is a simple cache mechanism for the presenters. 
+The proposed solution for handling screen orientation, is a simple cache mechanism for the presenters: 
+
+```java
+public class Cache implements Serializable {
+
+    private static Cache ourInstance;
+    private Map<UUID, Presenter> cache;
+
+    public static Cache getInstance() {
+        if (ourInstance == null) {
+            ourInstance = new Cache();
+        }
+        return ourInstance;
+    }
+
+    private Cache() {
+        cache = new HashMap<>();
+    }
+
+    public void cachePresenterFor(UUID uuid, Presenter presenter) {
+        cache.put(uuid, presenter);
+    }
+
+    public Presenter restorePresenterFor(UUID uuid) {
+        Presenter presenter = cache.get(uuid);
+        cache.remove(presenter);
+        return presenter;
+    }
+}
+```
 
 How does it work?
 
-During orientation change, the Android OS calls two callback methods, where the developer can save and restore the view state. 
-
-The callbacks are: __onSaveInstanceState__ and __onRestoreInstanceState__. 
+During orientation change, the Android OS calls two callback methods, where the developer can save and restore the view state. These callbacks are: __onSaveInstanceState__ and __onRestoreInstanceState__. 
 
 When __onSaveInstanceState__ is called, the presenter is cached: 
 
@@ -25,21 +52,38 @@ When __onSaveInstanceState__ is called, the presenter is cached:
     protected void onSaveInstanceState(Bundle outState) {
         // Save presenter instance
         outState.putString(PRESENTER, presenter.getUuid().toString());
-        Cache.getInstance().getCache().put(presenter.getUuid(), presenter);
+        cachePresenter(presenter);
+    }
+    
+    @Override
+    public void cachePresenter(Presenter presenter) {
+        Cache.getInstance().cachePresenterFor(presenter.getUuid(), presenter);
     }
 ```
 
-When __onRestoreInstanceState__ is called, the presenter
+The reason each presenter instance has a UUID, is to handle the case of multiple instances of the same view. Each view has to have its own presenter, so cache will contain multiple instances of the same presenter class. When the view is restored, it has to find the appropriate presenter in the cache.
+
+When __onRestoreInstanceState__ is called, the view restores its presenter from the cache, and the presenter restores its reference to the view:
 
 ```java
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        // Restore presenter instance
+        restorePresenter(UUID.fromString(savedInstanceState.getString(PRESENTER)));
+    }
+    
+    @Override
+    public void restorePresenter(UUID uuid) {
+        presenter = (FirstPresenter) Cache.getInstance().restorePresenterFor(uuid);
+        presenter.setScreen(this);
+    }
 ```
-
-that are saved and restored in the view callbacks
+The proposed solution for handeling asynchronous operations is to have 
 
 
 Known issues
 -------
-
+How to test unit test the presenters?
 
 License
 -------
