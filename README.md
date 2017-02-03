@@ -78,8 +78,25 @@ When __onRestoreInstanceState__ is called, the view restores its presenter from 
         presenter.setScreen(this);
     }
 ```
-The proposed solution for handeling asynchronous operations is to have 
+Asynchronous operations are handled in the presenters. Each presenter acts as a "bridge" between the view and the model (business logic). This "bridge" mechanism is implemented with __AsyncTasks__. Each __AsyncTask__ orchestrates the flow of date between the view and the model, performing background operations and publishing the results on the UI.
 
+```java
+    public void requestMessage(final FirstScreen screen) {
+        new AsyncTask<Void, Void, String>() {
+
+            @Override
+            protected String doInBackground(Void... params) {
+                return model.requestMessage();
+            }
+
+            @Override
+            protected void onPostExecute(String message) {
+                super.onPostExecute(message);
+                screen.postMessage(message);
+            }
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    }
+```
 
 Known issues
 -------
