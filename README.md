@@ -6,7 +6,7 @@ Asynchronous MVP design for Android, without 3rd party libraries.
 
 Problem
 -------
-How to implement a simple, decoupled, testable, asynchronous MVP desing, without using any 3rd party libraries, that can also handle screen orientation.
+How to implement a simple, decoupled, testable, asynchronous MVP design, without using any 3rd party libraries, that can also handle screen orientation.
 
 Solution
 -------
