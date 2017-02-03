@@ -1,5 +1,9 @@
 # AndroidAsynchronousMVP
 
+Install
+-------
+Download and install the application from [here]: https://play.google.com/store/apps/details?id=ro.ovidiuconeac.androidasynchronousmvp&hl=en
+
 Description
 -------
 Asynchronous MVP design for Android, without 3rd party libraries.
