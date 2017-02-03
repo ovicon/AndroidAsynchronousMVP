@@ -2,7 +2,7 @@
 
 Install
 -------
-Download and install the application from [here](https://play.google.com/store/apps/details?id=ro.ovidiuconeac.androidasynchronousmvp&hl=en). 
+Download and install the application from [here](https://play.google.com/store/apps/details?id=ro.ovidiuconeac.androidcallbackmvp&hl=en). 
 
 Description
 -------
