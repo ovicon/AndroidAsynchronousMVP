@@ -98,7 +98,7 @@ Asynchronous operations are handled in the presenters. Each presenter acts as a 
 Known issues
 -------
 How to test unit test the presenters?
-
+ 
 License
 -------
 
