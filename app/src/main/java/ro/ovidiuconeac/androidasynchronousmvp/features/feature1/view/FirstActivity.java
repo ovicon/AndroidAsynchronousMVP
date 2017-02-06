@@ -109,6 +109,7 @@ public class FirstActivity extends AppCompatActivity implements FirstScreen {
         }
     }
 
+    @OnClick(R.id.buttonLogin)
     @Override
     public void requestLogin() {
         enableUi(false);
@@ -136,11 +137,6 @@ public class FirstActivity extends AppCompatActivity implements FirstScreen {
     @Override
     public void postMessage(final String msg) {
         message.setText(msg);
-    }
-
-    @OnClick(R.id.buttonLogin)
-    public void login() {
-        requestLogin();
     }
 
     @Override
