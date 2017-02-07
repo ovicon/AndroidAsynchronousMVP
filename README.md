@@ -5,11 +5,11 @@ Install
 -------
 Download and install the application from [here](https://play.google.com/store/apps/details?id=ro.ovidiuconeac.androidcallbackmvp&hl=en). 
 
-Problem
+The problem
 -------
 How to implement a simple, decoupled, testable, asynchronous MVP design, without using any 3rd party libraries, that can also handle screen orientation.
 
-Solution
+The solution
 -------
 The proposed solution for handling screen orientation, is a simple cache mechanism for the presenters: 
 
