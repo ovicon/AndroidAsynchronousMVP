@@ -1,4 +1,5 @@
 # AndroidAsynchronousMVP
+Asynchronous MVP design for Android, without 3rd party libraries.
 
 Install
 -------
