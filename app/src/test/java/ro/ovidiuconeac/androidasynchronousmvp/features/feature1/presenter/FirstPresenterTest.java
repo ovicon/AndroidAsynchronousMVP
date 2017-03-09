@@ -1,4 +1,4 @@
-package ro.ovidiuconeac.androidasynchronousmvp.features.feature1;
+package ro.ovidiuconeac.androidasynchronousmvp.features.feature1.presenter;
 
 import org.junit.After;
 import org.junit.Before;
