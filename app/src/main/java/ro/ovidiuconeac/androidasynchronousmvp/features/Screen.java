@@ -9,7 +9,7 @@ import java.util.UUID;
  *
  * The purpose of this interface is to facilitate
  * the creation of the {@link Presenter} interface's
- * {@link Presenter#setScreen(Screen)} method.
+ * {@link Presenter#setView(Screen)} method.
  */
 
 public interface Screen {

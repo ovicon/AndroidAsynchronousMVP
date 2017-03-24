@@ -26,10 +26,9 @@ import butterknife.OnClick;
 import ro.ovidiuconeac.androidasynchronousmvp.R;
 import ro.ovidiuconeac.androidasynchronousmvp.cache.Cache;
 import ro.ovidiuconeac.androidasynchronousmvp.features.Presenter;
-import ro.ovidiuconeac.androidasynchronousmvp.features.feature1.presenter.FirstPresenter;
-import ro.ovidiuconeac.androidasynchronousmvp.features.feature2.presentor.SecondPresenter;
+import ro.ovidiuconeac.androidasynchronousmvp.features.feature2.presentor.SecondPresenterImpl;
 
-public class SecondActivity extends AppCompatActivity implements SecondScreen {
+public class SecondActivity extends AppCompatActivity implements SecondView {
 
     @BindView(R.id.progressBarName)
     ProgressBar progressBarName;
@@ -74,14 +73,14 @@ public class SecondActivity extends AppCompatActivity implements SecondScreen {
     private final static String IMG_IMG = "img_img";
     private final static String IMG_PRG = "img_prg";
 
-    private SecondPresenter presenter;
+    private SecondPresenterImpl presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
         ButterKnife.bind(this);
-        presenter = new SecondPresenter(this);
+        presenter = new SecondPresenterImpl(this);
     }
 
     @Override
@@ -218,7 +217,7 @@ public class SecondActivity extends AppCompatActivity implements SecondScreen {
 
     @Override
     public void restorePresenter(UUID uuid) {
-        presenter = (SecondPresenter) Cache.getInstance().restorePresenterFor(uuid);
-        presenter.setScreen(this);
+        presenter = (SecondPresenterImpl) Cache.getInstance().restorePresenterFor(uuid);
+        presenter.setView(this);
     }
 }

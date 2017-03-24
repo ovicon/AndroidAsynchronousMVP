@@ -2,15 +2,13 @@ package ro.ovidiuconeac.androidasynchronousmvp.features.feature1.presenter;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.UUID;
 
 import ro.ovidiuconeac.androidasynchronousmvp.features.Screen;
 import ro.ovidiuconeac.androidasynchronousmvp.features.feature1.model.User;
-import ro.ovidiuconeac.androidasynchronousmvp.features.feature1.presenter.FirstPresenter;
-import ro.ovidiuconeac.androidasynchronousmvp.features.feature1.view.FirstScreen;
+import ro.ovidiuconeac.androidasynchronousmvp.features.feature1.view.FirstView;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -25,13 +23,13 @@ import static org.mockito.Mockito.when;
  */
 public class FirstPresenterTest {
 
-    private FirstPresenter presenter;
-    private FirstScreen screen;
+    private FirstPresenterImpl presenter;
+    private FirstView screen;
 
     @Before
     public void setUp() {
-        screen = mock(FirstScreen.class);
-        presenter = mock(FirstPresenter.class);
+        screen = mock(FirstView.class);
+        presenter = mock(FirstPresenterImpl.class);
     }
 
     @After
@@ -48,14 +46,14 @@ public class FirstPresenterTest {
 
     @Test
     public void testRequestMessage() {
-        doNothing().when(presenter).requestMessage(any(FirstScreen.class));
+        doNothing().when(presenter).requestMessage(any(FirstView.class));
         presenter.requestMessage(screen);
     }
 
     @Test
     public void testSetScreen() {
-        doNothing().when(presenter).setScreen(any(Screen.class));
-        presenter.setScreen(screen);
+        doNothing().when(presenter).setView(any(Screen.class));
+        presenter.setView(screen);
     }
 
     @Test

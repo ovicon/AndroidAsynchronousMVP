@@ -1,23 +1,18 @@
 package ro.ovidiuconeac.androidasynchronousmvp.features.feature2.presenter;
 
-import android.graphics.Bitmap;
-
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.UUID;
 
 import ro.ovidiuconeac.androidasynchronousmvp.features.Screen;
-import ro.ovidiuconeac.androidasynchronousmvp.features.feature2.presentor.SecondPresenter;
-import ro.ovidiuconeac.androidasynchronousmvp.features.feature2.view.SecondScreen;
+import ro.ovidiuconeac.androidasynchronousmvp.features.feature2.presentor.SecondPresenterImpl;
+import ro.ovidiuconeac.androidasynchronousmvp.features.feature2.view.SecondView;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -28,13 +23,13 @@ import static org.mockito.Mockito.when;
  */
 public class SecondPresenterTest {
 
-    private SecondScreen screen;
-    private SecondPresenter presenter;
+    private SecondView screen;
+    private SecondPresenterImpl presenter;
 
     @Before
     public void setUp() {
-        screen = mock(SecondScreen.class);
-        presenter = mock(SecondPresenter.class);
+        screen = mock(SecondView.class);
+        presenter = mock(SecondPresenterImpl.class);
     }
 
     @After
@@ -63,8 +58,8 @@ public class SecondPresenterTest {
 
     @Test
     public void testSetScreen() {
-        doNothing().when(presenter).setScreen(any(Screen.class));
-        presenter.setScreen(screen);
+        doNothing().when(presenter).setView(any(Screen.class));
+        presenter.setView(screen);
     }
 
     @Test

@@ -7,7 +7,7 @@ import ro.ovidiuconeac.androidasynchronousmvp.features.Screen;
  *
  */
 
-public interface FirstScreen extends Screen {
+public interface FirstView extends Screen {
     void requestLogin();
     void doLogin();
     void showLoginError();

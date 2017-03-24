@@ -18,6 +18,7 @@ public class FirstModel {
 
     private Map<Integer, String> messages;
     private Random random;
+    private Message message;
 
     @SuppressLint("UseSparseArrays")
     public FirstModel() {
@@ -34,8 +35,10 @@ public class FirstModel {
         messages.put(9, "If not us, who? If not now, when?");
         messages.put(10, "I can, therefore I am.");
         random = new Random();
+        message = new Message();
     }
 
+    // Use case "validate user"
     public boolean isValid(User user) {
         boolean valid = false;
         if(USER.equals(user.getUser()) && PASSWORD.equals(user.getPassword())) {
@@ -44,7 +47,9 @@ public class FirstModel {
         return valid;
     }
 
-    public String requestMessage() {
-        return messages.get(random.nextInt(11));
+    // Use case "request random message"
+    public Message requestMessage() {
+        message.setMessage(messages.get(random.nextInt(11)));
+        return message;
     }
 }

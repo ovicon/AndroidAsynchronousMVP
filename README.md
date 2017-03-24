@@ -7,11 +7,11 @@ Download and install the application from [here](https://play.google.com/store/a
 
 The problem
 -------
-How to implement a simple, decoupled, testable, asynchronous MVP design, without using any 3rd party libraries, that can also handle screen orientation.
+How to implement a simple, decoupled, testable, asynchronous MVP design, without using any 3rd party libraries, that can also handle view orientation.
 
 The solution
 -------
-The proposed solution for handling screen orientation, is a simple cache mechanism for the presenters: 
+The proposed solution for handling view orientation, is a simple cache mechanism for the presenters: 
 
 ```java
 public class Cache implements Serializable {
@@ -80,7 +80,7 @@ When __onRestoreInstanceState__ is called, the view restores its presenter from 
 Asynchronous operations are handled in the presenters. Each presenter acts as a "bridge" between the view and the model (business logic). This "bridge" mechanism is implemented with __AsyncTasks__. Each __AsyncTask__ orchestrates the flow of date between the view and the model, performing background operations and publishing the results on the UI.
 
 ```java
-    public void requestMessage(final FirstScreen screen) {
+    public void requestMessage(final FirstScreen view) {
         new AsyncTask<Void, Void, String>() {
 
             @Override
@@ -91,7 +91,7 @@ Asynchronous operations are handled in the presenters. Each presenter acts as a 
             @Override
             protected void onPostExecute(String message) {
                 super.onPostExecute(message);
-                screen.postMessage(message);
+                view.postMessage(message);
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }

@@ -9,7 +9,7 @@ import ro.ovidiuconeac.androidasynchronousmvp.features.Screen;
  * Created by ovidiu on 12/29/16.
  */
 
-public interface SecondScreen extends Screen {
+public interface SecondView extends Screen {
     void requestName();
     void postName(String name);
     void requestAge();

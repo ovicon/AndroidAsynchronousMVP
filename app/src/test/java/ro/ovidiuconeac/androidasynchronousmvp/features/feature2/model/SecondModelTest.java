@@ -28,15 +28,10 @@ public class SecondModelTest {
     }
 
     @Test
-    public void testModelIsNotNull() {
-        assertNotNull(secondModel);
-    }
-
-    @Test
     public void testRequestAge() {
         boolean testResult = false;
         for (int i=0; i<10 ; i++) {
-            testResult = isValid(secondModel.requestAge());
+            testResult = isValid(secondModel.requestAge().getAge());
             if (!testResult) {
                 break;
             }

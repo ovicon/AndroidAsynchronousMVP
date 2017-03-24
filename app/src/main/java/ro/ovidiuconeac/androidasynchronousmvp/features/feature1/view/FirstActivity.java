@@ -23,10 +23,10 @@ import ro.ovidiuconeac.androidasynchronousmvp.R;
 import ro.ovidiuconeac.androidasynchronousmvp.cache.Cache;
 import ro.ovidiuconeac.androidasynchronousmvp.features.Presenter;
 import ro.ovidiuconeac.androidasynchronousmvp.features.feature1.model.User;
-import ro.ovidiuconeac.androidasynchronousmvp.features.feature1.presenter.FirstPresenter;
+import ro.ovidiuconeac.androidasynchronousmvp.features.feature1.presenter.FirstPresenterImpl;
 import ro.ovidiuconeac.androidasynchronousmvp.features.feature2.view.SecondActivity;
 
-public class FirstActivity extends AppCompatActivity implements FirstScreen {
+public class FirstActivity extends AppCompatActivity implements FirstView {
 
     @BindView(R.id.editTextUser)
     EditText user;
@@ -52,7 +52,7 @@ public class FirstActivity extends AppCompatActivity implements FirstScreen {
     private final static String LOGIN = "login";
     private final static String MESSAGE = "message";
 
-    private FirstPresenter presenter;
+    private FirstPresenterImpl presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +66,7 @@ public class FirstActivity extends AppCompatActivity implements FirstScreen {
             password.setText("admin");
 
         }
-        presenter = new FirstPresenter(this);
+        presenter = new FirstPresenterImpl(this);
     }
 
     @Override
@@ -169,7 +169,7 @@ public class FirstActivity extends AppCompatActivity implements FirstScreen {
 
     @Override
     public void restorePresenter(UUID uuid) {
-        presenter = (FirstPresenter) Cache.getInstance().restorePresenterFor(uuid);
-        presenter.setScreen(this);
+        presenter = (FirstPresenterImpl) Cache.getInstance().restorePresenterFor(uuid);
+        presenter.setView(this);
     }
 }

@@ -30,11 +30,6 @@ public class FirstModelTest {
     }
 
     @Test
-    public void testModelIsNotNull() {
-        assertNotNull(firstModel);
-    }
-
-    @Test
     public void testUserIsValid() {
         assertTrue(firstModel.isValid(new User("admin", "admin")));
     }
@@ -67,5 +62,6 @@ public class FirstModelTest {
     @Test
     public void requestMessage() {
         assertNotNull(firstModel.requestMessage());
+        assertNotNull(firstModel.requestMessage().getMessage());
     }
 }

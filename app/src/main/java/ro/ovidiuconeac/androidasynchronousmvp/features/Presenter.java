@@ -15,7 +15,7 @@ public interface Presenter {
      reference in the presenter, after an
      orientation change
      */
-    void setScreen(Screen screen);
+    void setView(Screen view);
 
     /*
      The UUID is used to save and restore

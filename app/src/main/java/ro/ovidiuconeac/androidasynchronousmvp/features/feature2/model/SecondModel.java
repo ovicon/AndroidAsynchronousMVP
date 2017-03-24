@@ -45,16 +45,23 @@ public class SecondModel {
         images.put(4, "img5.png");
     }
 
-    public String requestName() {
-        return names.get(random.nextInt(11));
+    public Name requestName() {
+        Name name = new Name();
+        name.setName(names.get(random.nextInt(11)));
+        return name;
     }
 
-    public int requestAge() {
-        return random.nextInt(101);
+    public Age requestAge() {
+        Age age = new Age();
+        age.setAge(random.nextInt(101));
+        return age;
     }
 
-    public Bitmap requestImage(Context context) {
-        return getRandomBitmap(context.getAssets());
+    public Image requestImage(Context context) {
+        Bitmap bitmap = getRandomBitmap(context.getAssets());
+        Image image = new Image();
+        image.setBitmap(bitmap);
+        return image;
     }
 
     private Bitmap getRandomBitmap(AssetManager assetManager) {
