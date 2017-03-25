@@ -20,12 +20,12 @@ import ro.ovidiuconeac.androidasynchronousmvp.features.feature2.view.SecondView;
 public class SecondPresenterImpl implements SecondPresenter {
 
     private UUID uuid;
-    private SecondView screen;
+    private SecondView view;
     private SecondModel model;
 
     public SecondPresenterImpl(SecondView view) {
         this.uuid = UUID.randomUUID();
-        this.screen = view;
+        this.view = view;
         this.model = new SecondModel();
     }
 
@@ -43,7 +43,7 @@ public class SecondPresenterImpl implements SecondPresenter {
             @Override
             protected void onPostExecute(String name) {
                 super.onPostExecute(name);
-                screen.postName(name);
+                view.postName(name);
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
@@ -62,7 +62,7 @@ public class SecondPresenterImpl implements SecondPresenter {
             @Override
             protected void onPostExecute(Integer age) {
                 super.onPostExecute(age);
-                screen.postAge(age);
+                view.postAge(age);
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
@@ -74,21 +74,21 @@ public class SecondPresenterImpl implements SecondPresenter {
             @Override
             protected Bitmap doInBackground(Void... params) {
                 Util.simulateNetworkLatency(4000);
-                Image image = model.requestImage(screen.getContext());
+                Image image = model.requestImage(view.getContext());
                 return image.getBitmap();
             }
 
             @Override
             protected void onPostExecute(Bitmap bitmap) {
                 super.onPostExecute(bitmap);
-                screen.postImage(bitmap);
+                view.postImage(bitmap);
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);;
     }
 
     @Override
     public void setView(Screen view) {
-        this.screen = (SecondView) view;
+        this.view = (SecondView) view;
     }
 
     @Override
