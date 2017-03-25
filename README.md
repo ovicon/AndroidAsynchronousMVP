@@ -1,5 +1,5 @@
 # AndroidAsynchronousMVP
-A backup of the [__master__](https://github.com/ovicon/AndroidAsynchronousMVP) branch.
+A backup of the [__master__](https://github.com/ovicon/AndroidAsynchronousMVP) branch. More loosely coupled MVP design.
  
 License
 -------
