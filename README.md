@@ -102,7 +102,7 @@ The branches
 ------- 
 __master__ - The master branch
 
-__freeze-version-1__ - A backup of the master branch 
+__freeze-version-1__ - A backup of the master branch. 
 
 __freeze-version-2__ - A branch based on "freeze-version-1". Added tests for views, use programing by interface to create MVP dependencies.
 
