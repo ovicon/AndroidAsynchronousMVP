@@ -1,5 +1,5 @@
 # AndroidAsynchronousMVP
-freeze-version-3 - A branch based on "freeze-version-2". Removed the AsyncTasks from the presenters. Moved asynchronous operations to views.
+A branch based on "freeze-version-2". Removed the AsyncTasks from the presenters. Moved asynchronous operations to views.
  
 License
 -------
