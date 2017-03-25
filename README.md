@@ -98,6 +98,13 @@ Asynchronous operations are handled in the presenters. Each presenter acts as a 
 ```
 If you are looking for a basic foundation upon which to build your own applications, based on this proposed MVP solution, please take a look at the following repository: [Boilerpart code for asynchronous MVP design for Android, without 3rd party libraries.](https://github.com/ovicon/AndroidAsynchronousMVPBoilerpart)
  
+The branches
+------- 
+__master__ - The master branch
+__freeze-version-1__ - A backup of the master branch 
+__freeze-version-2__ - A branch based on "freeze-version-1". Added tests for views, use programing by interface to create MVP dependencies.
+__freeze-version-3__ - A branch based on "freeze-version-2". Removed the AsyncTasks from the presenters. Moved asynchronous operations to views.
+ 
 License
 -------
 
