@@ -1,7 +1,5 @@
 package ro.ovidiuconeac.androidasynchronousmvp.features.feature1.presenter;
 
-import android.os.AsyncTask;
-
 import java.util.UUID;
 
 import ro.ovidiuconeac.androidasynchronousmvp.common.Util;
@@ -24,49 +22,36 @@ public class FirstPresenterImpl implements FirstPresenter {
     public FirstPresenterImpl(FirstView view) {
         this.uuid = UUID.randomUUID();
         this.view = view;
-        this.model = new FirstModel();
+        this.model = new FirstModel(this);
     }
 
     @Override
-    public void requestLogin(final User user) {
-        new AsyncTask<Void, Void, Boolean>() {
-
-            @Override
-            protected Boolean doInBackground(Void... params) {
-                Util.simulateNetworkLatency(3000);
-                return model.isValid(user);
-            }
-
-            @Override
-            protected void onPostExecute(Boolean aBoolean) {
-                super.onPostExecute(aBoolean);
-                if (aBoolean) {
-                    view.doLogin();
-                } else {
-                    view.showLoginError();
-                }
-            }
-        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    public void requestLogin(User user) {
+        Util.simulateNetworkLatency(3000);
+        model.requestLogin(user);
     }
 
     @Override
-    public void requestMessage(final FirstView screen) {
-        new AsyncTask<Void, Void, String>() {
-
-            @Override
-            protected String doInBackground(Void... params) {
-                Message result = model.requestMessage();
-                return result.getMessage();
-            }
-
-            @Override
-            protected void onPostExecute(String message) {
-                super.onPostExecute(message);
-                screen.postMessage(message);
-            }
-        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    public void doLogin() {
+        view.doLogin();
     }
 
+    @Override
+    public void showLoginError() {
+        view.showLoginError();
+    }
+
+    @Override
+    public void requestMessage() {
+        model.requestMessage();
+    }
+
+    @Override
+    public void postMessage(Message message) {
+        view.postMessage(message.getMessage());
+    }
+
+    @Override
     public void setView(Screen view) {
         this.view = (FirstView) view;
     }

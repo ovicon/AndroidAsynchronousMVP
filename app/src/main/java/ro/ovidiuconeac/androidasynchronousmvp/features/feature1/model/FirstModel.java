@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import ro.ovidiuconeac.androidasynchronousmvp.features.feature1.presenter.FirstPresenter;
+
 /**
  * Created by ovidiu on 12/29/16.
  *
@@ -16,12 +18,14 @@ public class FirstModel {
     private static final String USER = "admin";
     private static final String PASSWORD = "admin";
 
+    private FirstPresenter presenter;
     private Map<Integer, String> messages;
     private Random random;
     private Message message;
 
     @SuppressLint("UseSparseArrays")
-    public FirstModel() {
+    public FirstModel(FirstPresenter presenter) {
+        this.presenter = presenter;
         messages = new HashMap<>();
         messages.put(0, "In teaching others we teach ourselves.");
         messages.put(1, "Don’t regret the past, just learn from it.");
@@ -38,18 +42,18 @@ public class FirstModel {
         message = new Message();
     }
 
-    // Use case "validate user"
-    public boolean isValid(User user) {
-        boolean valid = false;
+    // Use case "request login"
+    public void requestLogin(User user) {
         if(USER.equals(user.getUser()) && PASSWORD.equals(user.getPassword())) {
-            valid = true;
+            presenter.doLogin();
+        } else {
+            presenter.showLoginError();
         }
-        return valid;
     }
 
     // Use case "request random message"
-    public Message requestMessage() {
+    public void requestMessage() {
         message.setMessage(messages.get(random.nextInt(11)));
-        return message;
+        presenter.postMessage(message);
     }
 }

@@ -45,12 +45,14 @@ public class SecondModel {
         images.put(4, "img5.png");
     }
 
+    // Use case "request name"
     public Name requestName() {
         Name name = new Name();
         name.setName(names.get(random.nextInt(11)));
         return name;
     }
 
+    // Use case "request age"
     public Age requestAge() {
         Age age = new Age();
         age.setAge(random.nextInt(101));

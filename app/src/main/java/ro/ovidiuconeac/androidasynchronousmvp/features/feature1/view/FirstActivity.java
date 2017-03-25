@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.UUID;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,6 +55,7 @@ public class FirstActivity extends AppCompatActivity implements FirstView {
     private final static String MESSAGE = "message";
 
     private FirstPresenterImpl presenter;
+    private ExecutorService executorService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,18 @@ public class FirstActivity extends AppCompatActivity implements FirstView {
 
         }
         presenter = new FirstPresenterImpl(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        executorService = Executors.newCachedThreadPool();
+    }
+
+    @Override
+    protected void onPause() {
+        executorService.shutdown();
+        super.onPause();
     }
 
     @Override
@@ -113,30 +128,55 @@ public class FirstActivity extends AppCompatActivity implements FirstView {
     @Override
     public void requestLogin() {
         enableUi(false);
-        presenter.requestLogin(new User(user.getText().toString(), password.getText().toString()));
+        executorService.submit(new Runnable() {
+            @Override
+            public void run() {
+                presenter.requestLogin(new User(user.getText().toString(), password.getText().toString()));
+            }
+        });
     }
 
     @Override
     public void doLogin() {
-        startActivity(new Intent(this, SecondActivity.class));
-        finish();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent(getApplicationContext(), SecondActivity.class));
+                finish();
+            }
+        });
     }
 
     @Override
     public void showLoginError() {
-        enableUi(true);
-        Toast.makeText(this, getString(R.string.login_error), Toast.LENGTH_SHORT).show();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                enableUi(true);
+                Toast.makeText(getApplicationContext(), getString(R.string.login_error), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
     @OnClick(R.id.buttonRequestMessage)
     public void requestMessage() {
-        presenter.requestMessage(this);
+        executorService.submit(new Runnable() {
+            @Override
+            public void run() {
+                presenter.requestMessage();
+            }
+        });
     }
 
     @Override
     public void postMessage(final String msg) {
-        message.setText(msg);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                message.setText(msg);
+            }
+        });
     }
 
     @Override
