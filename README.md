@@ -102,11 +102,11 @@ The branches
 ------- 
 __master__ - The master branch
 
-__freeze-version-1__ - A backup of the master branch. 
+[__freeze-version-1__](https://github.com/ovicon/AndroidAsynchronousMVP/tree/freeze-version-1) - A backup of the master branch. 
 
-__freeze-version-2__ - A branch based on "freeze-version-1". Added tests for views, use programing by interface to create MVP dependencies.
+[__freeze-version-2__](https://github.com/ovicon/AndroidAsynchronousMVP/tree/freeze-version-2) - A branch based on "freeze-version-1". Added tests for views, use programing by interface to create MVP dependencies.
 
-__freeze-version-3__ - A branch based on "freeze-version-2". Removed the AsyncTasks from the presenters. Moved asynchronous operations to views.
+[__freeze-version-3__](https://github.com/ovicon/AndroidAsynchronousMVP/tree/freeze-version-3) - A branch based on "freeze-version-2". Removed the AsyncTasks from the presenters. Moved asynchronous operations to views.
  
 License
 -------
