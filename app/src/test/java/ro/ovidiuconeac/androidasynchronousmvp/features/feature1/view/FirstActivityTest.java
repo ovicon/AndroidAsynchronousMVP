@@ -1,11 +1,8 @@
 package ro.ovidiuconeac.androidasynchronousmvp.features.feature1.view;
 
-import android.graphics.Bitmap;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doNothing;

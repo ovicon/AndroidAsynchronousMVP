@@ -4,9 +4,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import ro.ovidiuconeac.androidasynchronousmvp.features.feature1.model.FirstModel;
-import ro.ovidiuconeac.androidasynchronousmvp.features.feature1.model.User;
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
