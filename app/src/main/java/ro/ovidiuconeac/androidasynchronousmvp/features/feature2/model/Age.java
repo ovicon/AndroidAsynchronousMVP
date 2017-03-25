@@ -6,14 +6,14 @@ package ro.ovidiuconeac.androidasynchronousmvp.features.feature2.model;
 
 public class Age {
 
-    private int age;
+    private int value;
 
-    public int getAge() {
-        return age;
+    public int getValue() {
+        return value;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setValue(int value) {
+        this.value = value;
     }
 
     @Override
@@ -23,19 +23,19 @@ public class Age {
 
         Age age1 = (Age) o;
 
-        return age == age1.age;
+        return value == age1.value;
 
     }
 
     @Override
     public int hashCode() {
-        return age;
+        return value;
     }
 
     @Override
     public String toString() {
         return "Age{" +
-                "age=" + age +
+                "value=" + value +
                 '}';
     }
 }

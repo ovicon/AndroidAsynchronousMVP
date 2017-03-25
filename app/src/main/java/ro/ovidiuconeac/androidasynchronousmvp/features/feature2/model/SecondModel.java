@@ -11,6 +11,8 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Random;
 
+import ro.ovidiuconeac.androidasynchronousmvp.features.feature2.presentor.SecondPresenter;
+
 /**
  * Created by ovidiu on 12/29/16.
  *
@@ -22,9 +24,11 @@ public class SecondModel {
 
     private HashMap<Integer, String> names;
     private HashMap<Integer, String> images;
+    private SecondPresenter presenter;
 
     @SuppressLint("UseSparseArrays")
-    public SecondModel() {
+    public SecondModel(SecondPresenter presenter) {
+        this.presenter = presenter;
         this.names = new HashMap<>();
         names.put(0, "Ovidiu");
         names.put(1, "Coneac");
@@ -45,25 +49,25 @@ public class SecondModel {
         images.put(4, "img5.png");
     }
 
-    // Use case "request name"
-    public Name requestName() {
+    // Use case "request value"
+    public void requestName() {
         Name name = new Name();
-        name.setName(names.get(random.nextInt(11)));
-        return name;
+        name.setValue(names.get(random.nextInt(11)));
+        presenter.postName(name);
     }
 
     // Use case "request age"
-    public Age requestAge() {
+    public void requestAge() {
         Age age = new Age();
-        age.setAge(random.nextInt(101));
-        return age;
+        age.setValue(random.nextInt(101));
+        presenter.postAge(age);
     }
 
-    public Image requestImage(Context context) {
+    public void requestImage(Context context) {
         Bitmap bitmap = getRandomBitmap(context.getAssets());
         Image image = new Image();
         image.setBitmap(bitmap);
-        return image;
+        presenter.postImage(image);
     }
 
     private Bitmap getRandomBitmap(AssetManager assetManager) {

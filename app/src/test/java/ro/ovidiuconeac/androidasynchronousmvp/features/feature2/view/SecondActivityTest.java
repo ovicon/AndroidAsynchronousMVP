@@ -6,6 +6,9 @@ import android.graphics.Bitmap;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -19,53 +22,56 @@ import static org.mockito.Mockito.when;
 /**
  * Created by www.ovidiuconeac.ro on 3/24/17.
  */
-
+@RunWith(MockitoJUnitRunner.class)
 public class SecondActivityTest {
 
+    @Mock
     private SecondActivity view;
-
-    @Before
-    public void setUp() {
-        view = mock(SecondActivity.class);
-    }
-
-    @After
-    public void tearDown() {
-        view = null;
-    }
 
     @Test
     public void testRequestName() {
+        // Al least it tests that the method exists in the presenter
+        // Assures interface consistency
         doNothing().when(view).requestName();
         view.requestName();
     }
 
     @Test
     public void testPostName() {
+        // Al least it tests that the method exists in the presenter
+        // Assures interface consistency
         doNothing().when(view).postName(anyString());
         view.postName(anyString());
     }
 
     @Test
     public void testRequestAge() {
+        // Al least it tests that the method exists in the presenter
+        // Assures interface consistency
         doNothing().when(view).requestAge();
         view.requestAge();
     }
 
     @Test
     public void testPostAge() {
+        // Al least it tests that the method exists in the presenter
+        // Assures interface consistency
         doNothing().when(view).postAge(anyInt());
         view.postAge(anyInt());
     }
 
     @Test
     public void testRequestImage() {
+        // Al least it tests that the method exists in the presenter
+        // Assures interface consistency
         doNothing().when(view).requestImage();
         view.requestImage();
     }
 
     @Test
     public void testPostImage() {
+        // Al least it tests that the method exists in the presenter
+        // Assures interface consistency
         doNothing().when(view).postImage(any(Bitmap.class));
         view.postImage(any(Bitmap.class));
     }

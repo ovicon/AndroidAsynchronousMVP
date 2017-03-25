@@ -19,6 +19,8 @@ import android.widget.ProgressBar;
 
 import java.io.ByteArrayOutputStream;
 import java.util.UUID;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -74,6 +76,7 @@ public class SecondActivity extends AppCompatActivity implements SecondView {
     private final static String IMG_PRG = "img_prg";
 
     private SecondPresenterImpl presenter;
+    private ExecutorService executorService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +84,18 @@ public class SecondActivity extends AppCompatActivity implements SecondView {
         setContentView(R.layout.activity_second);
         ButterKnife.bind(this);
         presenter = new SecondPresenterImpl(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        executorService = Executors.newCachedThreadPool();
+    }
+
+    @Override
+    protected void onPause() {
+        executorService.shutdown();
+        super.onPause();
     }
 
     @Override
@@ -139,15 +154,25 @@ public class SecondActivity extends AppCompatActivity implements SecondView {
         editTextName.setEnabled(false);
         buttonName.setEnabled(false);
         progressBarName.setVisibility(View.VISIBLE);
-        presenter.requestName();
+        executorService.submit(new Runnable() {
+            @Override
+            public void run() {
+                presenter.requestName();
+            }
+        });
     }
 
     @Override
     public void postName(final String name) {
-        editTextName.setEnabled(true);
-        buttonName.setEnabled(true);
-        progressBarName.setVisibility(View.INVISIBLE);
-        editTextName.setText(name);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                editTextName.setEnabled(true);
+                buttonName.setEnabled(true);
+                progressBarName.setVisibility(View.INVISIBLE);
+                editTextName.setText(name);
+            }
+        });
     }
 
     @Override
@@ -156,15 +181,25 @@ public class SecondActivity extends AppCompatActivity implements SecondView {
         editTextAge.setEnabled(false);
         buttonAge.setEnabled(false);
         progressBarAge.setVisibility(View.VISIBLE);
-        presenter.requestAge();
+        executorService.submit(new Runnable() {
+            @Override
+            public void run() {
+                presenter.requestAge();
+            }
+        });
     }
 
     @Override
     public void postAge(final int age) {
-        editTextAge.setEnabled(true);
-        buttonAge.setEnabled(true);
-        progressBarAge.setVisibility(View.INVISIBLE);
-        editTextAge.setText(String.valueOf(age));
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                editTextAge.setEnabled(true);
+                buttonAge.setEnabled(true);
+                progressBarAge.setVisibility(View.INVISIBLE);
+                editTextAge.setText(String.valueOf(age));
+            }
+        });
     }
 
     @Override
@@ -172,14 +207,24 @@ public class SecondActivity extends AppCompatActivity implements SecondView {
     public void requestImage() {
         buttonImage.setEnabled(false);
         progressBarImage.setVisibility(View.VISIBLE);
-        presenter.requestImage();
+        executorService.submit(new Runnable() {
+            @Override
+            public void run() {
+                presenter.requestImage();
+            }
+        });
     }
 
     @Override
     public void postImage(final Bitmap bitmap) {
-        buttonImage.setEnabled(true);
-        progressBarImage.setVisibility(View.INVISIBLE);
-        imageView.setImageBitmap(bitmap);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                buttonImage.setEnabled(true);
+                progressBarImage.setVisibility(View.INVISIBLE);
+                imageView.setImageBitmap(bitmap);
+            }
+        });
     }
 
     @Override

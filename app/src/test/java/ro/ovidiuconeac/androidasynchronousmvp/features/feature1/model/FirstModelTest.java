@@ -4,9 +4,16 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import ro.ovidiuconeac.androidasynchronousmvp.features.feature1.presenter.FirstPresenter;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.calls;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 /**
  * Created by ovidiu on 1/2/17.
@@ -14,11 +21,13 @@ import static org.junit.Assert.assertTrue;
 
 public class FirstModelTest {
 
+    private FirstPresenter firstPresenter;
     private FirstModel firstModel;
 
     @Before
     public void setUp() {
-        firstModel = new FirstModel();
+        firstPresenter = mock(FirstPresenter.class);
+        firstModel = new FirstModel(firstPresenter);
     }
 
     @After
@@ -27,38 +36,20 @@ public class FirstModelTest {
     }
 
     @Test
-    public void testUserIsValid() {
-        assertTrue(firstModel.requestLogin(new User("admin", "admin")));
+    public void testRequestLoginWithValidUser() {
+        firstModel.requestLogin(new User("admin", "admin"));
+        verify(firstPresenter, atLeast(1)).doLogin();
     }
 
     @Test
-    public void testUserIsInvalidWithEmptyCredentials() {
-        assertFalse(firstModel.requestLogin(new User("", "")));
-    }
-
-    @Test
-    public void testUserIsInvalidWithWrongUserAndRightPassword() {
-        assertFalse(firstModel.requestLogin(new User("Admin", "admin")));
-    }
-
-    @Test
-    public void testUserIsInvalidWithWrongPasswordAndRightUser() {
-        assertFalse(firstModel.requestLogin(new User("admin", "Admin")));
-    }
-
-    @Test
-    public void testUserIsInvalidWithMissingPassword() {
-        assertFalse(firstModel.requestLogin(new User("admin", "")));
-    }
-
-    @Test
-    public void testUserIsInvalidWithMissingUser() {
-        assertFalse(firstModel.requestLogin(new User("", "admin")));
+    public void testRequestLoginWithInvalidUser() {
+        firstModel.requestLogin(new User("admina", "admin"));
+        verify(firstPresenter, atLeast(1)).showLoginError();
     }
 
     @Test
     public void requestMessage() {
-        assertNotNull(firstModel.requestMessage());
-        assertNotNull(firstModel.requestMessage().getMessage());
+        firstModel.requestMessage();
+        verify(firstPresenter, atLeast(1)).postMessage(any(Message.class));
     }
 }

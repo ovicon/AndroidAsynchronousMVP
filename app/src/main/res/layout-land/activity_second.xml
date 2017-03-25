@@ -31,7 +31,7 @@
         android:id="@+id/editTextName" />
 
     <Button
-        android:text="@string/name"
+        android:text="@string/get"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/editTextName"
@@ -50,12 +50,13 @@
         android:visibility="invisible" />
 
     <Button
-        android:text="@string/age"
+        android:text="@string/get"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/buttonName"
         android:layout_toEndOf="@+id/editTextName"
-        android:id="@+id/buttonAge" />
+        android:id="@+id/buttonAge"
+        android:layout_toRightOf="@+id/editTextName" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -64,7 +65,8 @@
         android:ems="10"
         android:layout_alignBottom="@+id/progressBarAge"
         android:layout_toStartOf="@+id/buttonAge"
-        android:id="@+id/editTextAge" />
+        android:id="@+id/editTextAge"
+        android:layout_toLeftOf="@+id/buttonAge" />
 
     <ProgressBar
         style="?android:attr/progressBarStyle"
@@ -77,12 +79,13 @@
         android:visibility="invisible" />
 
     <Button
-        android:text="@string/image"
+        android:id="@+id/buttonImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/buttonAge"
         android:layout_toEndOf="@+id/editTextAge"
-        android:id="@+id/buttonImage" />
+        android:layout_toRightOf="@+id/editTextAge"
+        android:text="@string/get" />
 
     <ImageView
         android:layout_width="wrap_content"

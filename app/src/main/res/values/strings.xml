@@ -2,7 +2,7 @@
     <string name="app_name">AndroidAsynchronousMVP</string>
     <string name="hint_user">User</string>
     <string name="hint_password">Password</string>
-    <string name="login" >Login</string>
+    <string name="login">Login</string>
     <string name="login_error">Login error</string>
     <string name="random_message">Random mesage</string>
     <string name="name">Name</string>
@@ -10,4 +10,5 @@
     <string name="image">Image</string>
     <string name="visit_developer">Visit developer</string>
     <string name="developer">http://www.ovidiuconeac.ro/</string>
+    <string name="get">Get</string>
 </resources>

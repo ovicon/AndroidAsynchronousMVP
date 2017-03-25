@@ -6,14 +6,14 @@ package ro.ovidiuconeac.androidasynchronousmvp.features.feature2.model;
 
 public class Name {
 
-    public String name;
+    public String value;
 
-    public String getName() {
-        return name;
+    public String getValue() {
+        return value;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     @Override
@@ -23,19 +23,19 @@ public class Name {
 
         Name name1 = (Name) o;
 
-        return name != null ? name.equals(name1.name) : name1.name == null;
+        return value != null ? value.equals(name1.value) : name1.value == null;
 
     }
 
     @Override
     public int hashCode() {
-        return name != null ? name.hashCode() : 0;
+        return value != null ? value.hashCode() : 0;
     }
 
     @Override
     public String toString() {
         return "Name{" +
-                "name='" + name + '\'' +
+                "value='" + value + '\'' +
                 '}';
     }
 }

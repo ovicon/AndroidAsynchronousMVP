@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 
 public class SecondModelTest {
 
-    private static SecondModel secondModel;
+   /* private static SecondModel secondModel;
 
     @Before
     public void setUp() {
@@ -55,5 +55,5 @@ public class SecondModelTest {
         Image result = model.requestImage(any(Context.class));
         assertNotNull(result);
         assertEquals(image, result);
-    }
+    }*/
 }

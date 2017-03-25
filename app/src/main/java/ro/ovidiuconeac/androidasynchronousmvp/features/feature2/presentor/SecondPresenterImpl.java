@@ -1,8 +1,5 @@
 package ro.ovidiuconeac.androidasynchronousmvp.features.feature2.presentor;
 
-import android.graphics.Bitmap;
-import android.os.AsyncTask;
-
 import java.util.UUID;
 
 import ro.ovidiuconeac.androidasynchronousmvp.common.Util;
@@ -26,64 +23,40 @@ public class SecondPresenterImpl implements SecondPresenter {
     public SecondPresenterImpl(SecondView view) {
         this.uuid = UUID.randomUUID();
         this.view = view;
-        this.model = new SecondModel();
+        this.model = new SecondModel(this);
     }
 
     @Override
     public void requestName() {
-        new AsyncTask<Void, Void, String>() {
+        Util.simulateNetworkLatency(2000);
+        model.requestName();
+    }
 
-            @Override
-            protected String doInBackground(Void... params) {
-                Util.simulateNetworkLatency(2000);
-                Name name = model.requestName();
-                return name.getName();
-            }
-
-            @Override
-            protected void onPostExecute(String name) {
-                super.onPostExecute(name);
-                view.postName(name);
-            }
-        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    @Override
+    public void postName(Name name) {
+        view.postName(name.toString());
     }
 
     @Override
     public void requestAge() {
-        new AsyncTask<Void, Void, Integer>() {
+        Util.simulateNetworkLatency(2000);
+        model.requestAge();
+    }
 
-            @Override
-            protected Integer doInBackground(Void... params) {
-                Util.simulateNetworkLatency(3000);
-                Age age = model.requestAge();
-                return age.getAge();
-            }
-
-            @Override
-            protected void onPostExecute(Integer age) {
-                super.onPostExecute(age);
-                view.postAge(age);
-            }
-        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    @Override
+    public void postAge(Age age) {
+        view.postAge(age.getValue());
     }
 
     @Override
     public void requestImage() {
-        new AsyncTask<Void, Void, Bitmap>() {
+        Util.simulateNetworkLatency(2000);
+        model.requestImage(view.getContext());
+    }
 
-            @Override
-            protected Bitmap doInBackground(Void... params) {
-                Util.simulateNetworkLatency(4000);
-                Image image = model.requestImage(view.getContext());
-                return image.getBitmap();
-            }
-
-            @Override
-            protected void onPostExecute(Bitmap bitmap) {
-                super.onPostExecute(bitmap);
-                view.postImage(bitmap);
-            }
-        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);;
+    @Override
+    public void postImage(Image image) {
+        view.postImage(image.getBitmap());
     }
 
     @Override
