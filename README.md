@@ -1,5 +1,5 @@
 # AndroidAsynchronousMVP
-A branch based on "freeze-version-1". Added tests for views, use programing by interface to create MVP dependencies.
+A branch based on [__freeze-version-1__](https://github.com/ovicon/AndroidAsynchronousMVP/tree/freeze-version-1). Added tests for views, use programing by interface to create MVP dependencies.
  
 License
 -------
