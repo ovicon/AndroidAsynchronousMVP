@@ -1,16 +1,23 @@
 package ro.ovidiuconeac.androidasynchronousmvp.features.feature2.model;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
+
+import ro.ovidiuconeac.androidasynchronousmvp.features.feature2.presentor.SecondPresenter;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.timeout;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -19,41 +26,36 @@ import static org.mockito.Mockito.when;
 
 public class SecondModelTest {
 
-   /* private static SecondModel secondModel;
+    private SecondPresenter presenter;
+    private SecondModel model;
 
     @Before
     public void setUp() {
-        secondModel = new SecondModel();
+        presenter = mock(SecondPresenter.class);
+        model = new SecondModel(presenter);
     }
 
     @After
     public void tearDown() {
-        secondModel = null;
+        model = null;
+    }
+
+    @Test
+    public void testRequestName() {
+        model.requestName();
+        verify(presenter, times(1)).postName(any(Name.class));
     }
 
     @Test
     public void testRequestAge() {
-        boolean testResult = false;
-        for (int i=0; i<10 ; i++) {
-            testResult = isValid(secondModel.requestAge().getAge());
-            if (!testResult) {
-                break;
-            }
-        }
-        assertTrue(testResult);
+        model.requestAge();
+        verify(presenter, times(1)).postAge(any(Age.class));
     }
 
-    private boolean isValid(int age) {
-        return age >= 0 && age <= 100;
-    }
-
+    @Ignore
     @Test
     public void testRequestImage() {
-        Image image = new Image();
         SecondModel model = mock(SecondModel.class);
-        when(model.requestImage(any(Context.class))).thenReturn(image);
-        Image result = model.requestImage(any(Context.class));
-        assertNotNull(result);
-        assertEquals(image, result);
-    }*/
+        model.requestImage(any(Context.class));
+    }
 }
