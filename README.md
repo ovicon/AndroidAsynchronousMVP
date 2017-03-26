@@ -1,5 +1,5 @@
 # AndroidAsynchronousMVP
-A branch based on [__freeze-version-2__](https://github.com/ovicon/AndroidAsynchronousMVP/tree/freeze-version-2). Removed the AsyncTasks from the presenters. Moved asynchronous operations to views.
+A branch based on [__freeze-version-3__](https://github.com/ovicon/AndroidAsynchronousMVP/tree/freeze-version-3). Removed presenter reference from model. More loosely coupled MVP design.
  
 License
 -------
