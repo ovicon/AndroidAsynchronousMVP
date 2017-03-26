@@ -4,6 +4,7 @@ import android.content.Context;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -19,7 +20,7 @@ import static org.mockito.Mockito.when;
 
 public class SecondModelTest {
 
-   /* private static SecondModel secondModel;
+   private static SecondModel secondModel;
 
     @Before
     public void setUp() {
@@ -32,19 +33,17 @@ public class SecondModelTest {
     }
 
     @Test
-    public void testRequestAge() {
-        boolean testResult = false;
-        for (int i=0; i<10 ; i++) {
-            testResult = isValid(secondModel.requestAge().getAge());
-            if (!testResult) {
-                break;
-            }
-        }
-        assertTrue(testResult);
+    public void testRequestName() {
+        Name result = secondModel.requestName();
+        assertNotNull(result);
+        assertNotNull(result.getValue());
     }
 
-    private boolean isValid(int age) {
-        return age >= 0 && age <= 100;
+    @Test
+    public void testRequestAge() {
+        Age result = secondModel.requestAge();
+        assertNotNull(result);
+        assertNotNull(result.getValue());
     }
 
     @Test
@@ -55,5 +54,5 @@ public class SecondModelTest {
         Image result = model.requestImage(any(Context.class));
         assertNotNull(result);
         assertEquals(image, result);
-    }*/
+    }
 }

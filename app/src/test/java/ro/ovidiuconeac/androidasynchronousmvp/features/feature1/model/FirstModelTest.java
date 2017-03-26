@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import ro.ovidiuconeac.androidasynchronousmvp.features.feature1.presenter.FirstPresenter;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -21,13 +22,11 @@ import static org.mockito.Mockito.verify;
 
 public class FirstModelTest {
 
-    private FirstPresenter firstPresenter;
     private FirstModel firstModel;
 
     @Before
     public void setUp() {
-        firstPresenter = mock(FirstPresenter.class);
-        firstModel = new FirstModel(firstPresenter);
+        firstModel = new FirstModel();
     }
 
     @After
@@ -37,19 +36,22 @@ public class FirstModelTest {
 
     @Test
     public void testRequestLoginWithValidUser() {
-        firstModel.requestLogin(new User("admin", "admin"));
-        verify(firstPresenter, atLeast(1)).doLogin();
+        Valid result = firstModel.requestLogin(new User("admin", "admin"));
+        assertNotNull(result);
+        assertEquals(true, result.getValue());
     }
 
     @Test
     public void testRequestLoginWithInvalidUser() {
-        firstModel.requestLogin(new User("admina", "admin"));
-        verify(firstPresenter, atLeast(1)).showLoginError();
+        Valid result = firstModel.requestLogin(new User("admina", "admin"));
+        assertNotNull(result);
+        assertEquals(false, result.getValue());
     }
 
     @Test
     public void requestMessage() {
-        firstModel.requestMessage();
-        verify(firstPresenter, atLeast(1)).postMessage(any(Message.class));
+        Message result = firstModel.requestMessage();
+        assertNotNull(result);
+        assertNotNull(result.getMessage());
     }
 }

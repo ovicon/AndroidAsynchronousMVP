@@ -23,39 +23,27 @@ public class SecondPresenterImpl implements SecondPresenter {
     public SecondPresenterImpl(SecondView view) {
         this.uuid = UUID.randomUUID();
         this.view = view;
-        this.model = new SecondModel(this);
+        this.model = new SecondModel();
     }
 
     @Override
     public void requestName() {
         Util.simulateNetworkLatency(2000);
-        model.requestName();
-    }
-
-    @Override
-    public void postName(Name name) {
-        view.postName(name.toString());
+        Name name = model.requestName();
+        view.postName(name.getValue());
     }
 
     @Override
     public void requestAge() {
         Util.simulateNetworkLatency(2000);
-        model.requestAge();
-    }
-
-    @Override
-    public void postAge(Age age) {
+        Age age = model.requestAge();
         view.postAge(age.getValue());
     }
 
     @Override
     public void requestImage() {
         Util.simulateNetworkLatency(2000);
-        model.requestImage(view.getContext());
-    }
-
-    @Override
-    public void postImage(Image image) {
+        Image image = model.requestImage(view.getContext());
         view.postImage(image.getBitmap());
     }
 
